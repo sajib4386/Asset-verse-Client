@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router";
 import RootLayOut from "../Layouts/RootLayOut/RootLayOut";
 import Home from "../Pages/Home/Home";
+import EmployeeRegister from "../Auth/EmployeeRegister";
+import HRRegister from "../Auth/HRRegister";
 
 export const router = createBrowserRouter([
     {
@@ -12,6 +14,15 @@ export const router = createBrowserRouter([
                 Component: Home
 
             },
+            {
+                path: "/employee-register",
+                Component: EmployeeRegister
+            },
+            {
+                path: "/hr-register",
+                Component: HRRegister
+            }
         ]
     },
+
 ]);

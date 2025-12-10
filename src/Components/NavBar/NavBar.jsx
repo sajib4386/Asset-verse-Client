@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router';
 
-const NavBar = ({ user }) => {
+const NavBar = () => {
 
     const publicLinks = <>
         <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/join-employee">Join as Employee</NavLink></li>
-        <li><NavLink to="/join-hr">Join as HR Manager</NavLink></li>
+        <li><NavLink to="/employee-register">Join as Employee</NavLink></li>
+        <li><NavLink to="/hr-register">Join as HR Manager</NavLink></li>
     </>;
 
     return (
@@ -23,17 +23,19 @@ const NavBar = ({ user }) => {
                     </ul>
                 </div>
                 {/* Logo */}
-                <div className="navbar-start">
+                <Link to="/">
+                    <div className="navbar-start">
 
-                    <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg relative p-5">
-                        <span className="text-white">A</span>
-                        <span className="text-yellow-300 -ml-1">V</span>
+                        <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg relative p-5">
+                            <span className="text-white">A</span>
+                            <span className="text-yellow-300 -ml-1">V</span>
+                        </div>
+
+                        <div className="text-2xl font-bold text-secondary">
+                            <span className="text-rose-600">A</span>sset<span className="text-rose-600">V</span>erse
+                        </div>
                     </div>
-
-                    <Link to="/" className="text-2xl font-bold text-secondary">
-                        <span className="text-rose-600">A</span>sset<span className="text-rose-600">V</span>erse
-                    </Link>
-                </div>
+                </Link>
             </div>
 
             <div className="navbar-center hidden lg:flex">
