@@ -1,14 +1,133 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import hrImg from "../assets/HR.png";
+import useAuth from "../Hooks/useAuth";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { useNavigate } from "react-router";
+import axios from "axios";
+import Swal from "sweetalert2";
+import Loading from "../Components/Loading/Loading";
 
 const HRRegister = () => {
-
+    const { createUser, updateUser } = useAuth();
+    const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [loading, setLoading] = useState(false);
 
-    const onSubmit = (data) => {
-        console.log("HR Form Data:", data);
+
+    const handleHRRegisterSubmit = (data) => {
+        setLoading(true);
+
+        const profileImg = data.photo[0];
+        const companyLogoImg = data.companyLogo[0];
+        const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_HOST_KEY}`;
+
+        createUser(data.email, data.password)
+            .then(() => {
+
+                // Upload profile photo
+                const profileForm = new FormData();
+                profileForm.append("image", profileImg);
+
+                axios.post(image_API_URL, profileForm)
+                    .then(res => {
+                        const profileURL = res.data.data.url;
+
+                        // Upload company logo
+                        const logoForm = new FormData();
+                        logoForm.append("image", companyLogoImg);
+
+                        axios.post(image_API_URL, logoForm)
+                            .then(res => {
+                                const companyLogoURL = res.data.data.url;
+
+                                // Prepare HR info
+                                const hrInfo = {
+                                    name: data.name,
+                                    email: data.email,
+                                    dateOfBirth: data.dateOfBirth,
+                                    photoURL: profileURL,
+                                    companyName: data.companyName,
+                                    companyLogo: companyLogoURL,
+                                };
+
+                                axiosSecure.post("/register/hr", hrInfo)
+                                    .then(res => {
+                                        if (res.data.success) {
+                                            updateUser({
+                                                displayName: data.name,
+                                                photoURL: profileURL
+                                            })
+                                                .then(() => {
+                                                    setLoading(false);
+                                                    Swal.fire({
+                                                        icon: "success",
+                                                        title: "HR Registration Successful",
+                                                        text: "Your HR Manager account has been created.",
+                                                    });
+                                                    navigate("/");
+                                                })
+                                                .catch(err => {
+                                                    setLoading(false);
+                                                    Swal.fire({
+                                                        icon: "error",
+                                                        title: "Profile Update Failed",
+                                                        text: err.message,
+                                                    });
+                                                });
+                                        } else {
+                                            setLoading(false);
+                                            Swal.fire({
+                                                icon: "error",
+                                                title: "Registration Failed",
+                                                text: res.data.message || "Something went wrong",
+                                            });
+                                        }
+                                    })
+                                    .catch(err => {
+                                        setLoading(false);
+                                        Swal.fire({
+                                            icon: "error",
+                                            title: "Registration Error",
+                                            text: err.message,
+                                        });
+                                    });
+
+                            })
+                            .catch(err => {
+                                setLoading(false);
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Company Logo Upload Failed",
+                                    text: err.message,
+                                });
+                            });
+
+                    })
+                    .catch(err => {
+                        setLoading(false);
+                        Swal.fire({
+                            icon: "error",
+                            title: "Profile Photo Upload Failed",
+                            text: err.message,
+                        });
+                    });
+
+            })
+            .catch(err => {
+                setLoading(false);
+                Swal.fire({
+                    icon: "error",
+                    title: "Account Creation Failed",
+                    text: err.message,
+                });
+            });
     };
+
+    if (loading) {
+        return <Loading></Loading>
+    }
 
     return (
         <div className="flex flex-col lg:flex-row w-full h-screen overflow-hidden">
@@ -34,7 +153,7 @@ const HRRegister = () => {
                     </p>
 
                     {/* FORM */}
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                    <form onSubmit={handleSubmit(handleHRRegisterSubmit)} className="space-y-4">
 
                         {/* Name */}
                         <div>
