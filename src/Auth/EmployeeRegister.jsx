@@ -1,22 +1,111 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import employeeImg from "../assets/Employee.jpg";
+import useAuth from "../Hooks/useAuth";
+import axios from "axios";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { useNavigate } from "react-router";
+import Loading from "../Components/Loading/Loading";
+import Swal from "sweetalert2";
+
 
 const EmployeeRegister = () => {
-
+    const { createUser, updateUser } = useAuth();
+    const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [loading, setLoading] = useState(false);
 
-    const onSubmit = (data) => {
-        console.log("Employee Form Data:", data);
+    const handleRegisterSubmit = (data) => {
+        setLoading(true);
+        const profileImg = data.photo[0];
+
+        createUser(data.email, data.password)
+            .then(() => {
+                const formData = new FormData();
+                formData.append("image", profileImg);
+                const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_HOST_KEY}`;
+
+                axios.post(image_API_URL, formData)
+                    .then(res => {
+                        const photoURL = res.data.data.url;
+
+                        const employeeInfo = {
+                            name: data.name,
+                            email: data.email,
+                            dateOfBirth: data.dateOfBirth,
+                            photoURL: photoURL
+                        };
+
+                        axiosSecure.post("/register/employee", employeeInfo)
+                            .then(res => {
+                                if (res.data.success) {
+                                    updateUser({ displayName: data.name, photoURL })
+                                        .then(() => {
+                                            setLoading(false);
+                                            Swal.fire({
+                                                icon: "success",
+                                                title: "Registration Successful",
+                                                text: "Your employee account has been created.",
+                                            });
+                                            navigate("/");
+                                        })
+                                        .catch(err => {
+                                            setLoading(false);
+                                            Swal.fire({
+                                                icon: "error",
+                                                title: "Profile Update Failed",
+                                                text: err.message,
+                                            });
+                                        });
+                                } else {
+                                    setLoading(false);
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Registration Failed",
+                                        text: res.data.message || "Something went wrong",
+                                    });
+                                }
+                            })
+                            .catch(err => {
+                                setLoading(false);
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Registration Error",
+                                    text: err.message,
+                                });
+                            });
+                    })
+                    .catch(err => {
+                        setLoading(false);
+                        Swal.fire({
+                            icon: "error",
+                            title: "Image Upload Failed",
+                            text: err.message,
+                        });
+                    });
+            })
+            .catch(err => {
+                setLoading(false);
+                Swal.fire({
+                    icon: "error",
+                    title: "Account Creation Failed",
+                    text: err.message,
+                });
+            });
     };
 
+    if (loading) {
+        return <Loading></Loading>
+    }
+
     return (
-        <div className="flex flex-col lg:flex-row w-full">
+        <div className="flex flex-col lg:flex-row w-full h-screen overflow-hidden">
 
             {/* LEFT SIDE SECTION */}
-            <div className="w-full lg:w-1/2 flex items-center justify-center bg-[#f3faff] p-10">
+            <div className="w-full lg:w-1/2 flex items-center justify-center bg-[#f3faff] p-10 h-full">
 
-                <div className="bg-[#cae1f1] w-full max-w-xl p-5 lg:p-10 m-3 lg:m-0 rounded-2xl border-2 border-amber-400 shadow-gray-500 shadow-lg">
+                <div className="bg-[#cae1f1] w-full max-w-lg p-5 lg:p-10 m-3 lg:m-0 rounded-2xl border-2 border-amber-400 shadow-gray-500 shadow-lg">
 
                     {/* Logo */}
                     <div className="flex justify-center mb-5">
@@ -34,7 +123,7 @@ const EmployeeRegister = () => {
                     </p>
 
                     {/* FORM */}
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                    <form onSubmit={handleSubmit(handleRegisterSubmit)} className="space-y-4">
 
                         {/* NAME */}
                         <div>
@@ -112,11 +201,11 @@ const EmployeeRegister = () => {
             </div>
 
             {/* RIGHT SIDE IMAGE */}
-            <div className="w-full lg:w-1/2">
+            <div className="w-full lg:w-1/2 h-full">
                 <img
                     src={employeeImg}
                     alt=""
-                    className="w-full"
+                    className="w-full h-full"
                 />
             </div>
         </div>
