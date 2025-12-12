@@ -130,10 +130,10 @@ const HRRegister = () => {
     }
 
     return (
-        <div className="flex flex-col lg:flex-row w-full h-screen overflow-hidden">
+        <div className="flex flex-col lg:flex-row w-full min-h-screen overflow-hidden">
 
             {/* LEFT SIDE */}
-            <div className="w-full lg:w-1/2 flex items-center justify-center bg-[#f3faff] p-10 h-full">
+            <div className="w-full lg:w-1/2 flex items-center justify-center bg-[#f3faff] p-10">
 
                 <div className="bg-[#cae1f1] w-full max-w-xl p-5 lg:p-10 m-3 lg:m-0 rounded-2xl border-2 border-amber-400 shadow-gray-500 shadow-lg">
 
