@@ -41,7 +41,7 @@ const NavBar = () => {
     // Employee links
     const employeeLinks = (
         <>
-            <li><NavLink to="/my-assets">My Assets</NavLink></li>
+            <li><NavLink to="/dashboard/my-assets">My Assets</NavLink></li>
             <li><NavLink to="/my-team">My Team</NavLink></li>
             <li><NavLink to="/request-asset">Request Asset</NavLink></li>
             <li><NavLink to="/profile">Profile</NavLink></li>
@@ -53,7 +53,7 @@ const NavBar = () => {
     const hrLinks = (
         <>
             <li><NavLink to="/asset-list">Asset List</NavLink></li>
-            <li><NavLink to="/add-asset">Add Asset</NavLink></li>
+            <li><NavLink to="/dashboard/add-asset">Add Asset</NavLink></li>
             <li><NavLink to="/all-requests">All Requests</NavLink></li>
             <li><NavLink to="/employee-list">Employee List</NavLink></li>
             <li><NavLink to="/profile">Profile</NavLink></li>

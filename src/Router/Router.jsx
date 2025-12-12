@@ -5,7 +5,10 @@ import EmployeeRegister from "../Auth/EmployeeRegister";
 import HRRegister from "../Auth/HRRegister";
 import Login from "../Auth/Login";
 import NotFound from "../Components/NotFound/NotFound";
+import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import AddAsset from "../DashBoard/HR/AddAsset";
+import DashBoardHome from "../DashBoard/DashBoardHome/DashBoardHome";
+import MyAssets from "../DashBoard/Employee/MyAssets";
 
 export const router = createBrowserRouter([
     {
@@ -28,12 +31,6 @@ export const router = createBrowserRouter([
             {
                 path: "/login",
                 Component: Login
-            },
-
-            // HR DashBoard
-            {
-                path: "/add-asset",
-                Component: AddAsset
             }
         ]
     },
@@ -41,5 +38,31 @@ export const router = createBrowserRouter([
         path: "*",
         Component: NotFound
     },
+
+
+    // DashBoard Route
+    {
+        path: "/dashboard",
+        element: <DashboardLayout></DashboardLayout>,
+        children: [
+
+            {
+                index: true,
+                Component: DashBoardHome
+            },
+
+            // Employe Route
+            {
+                path: "/dashboard/my-assets",
+                Component: MyAssets
+            },
+
+            // HR Route
+            {
+                path: "/dashboard/add-asset",
+                element: <AddAsset></AddAsset>
+            }
+        ]
+    }
 
 ]);

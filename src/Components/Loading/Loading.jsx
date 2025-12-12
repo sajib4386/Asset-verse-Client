@@ -1,13 +1,10 @@
 import Lottie from "lottie-react";
 import sandyLoading from "../../Animation/Sandy_Loading.json";
-import NavBar from "../NavBar/NavBar";
-import Footer from "../Footer/Footer";
 
 
 const Loading = () => {
     return (
         <div className="w-full h-screen flex flex-col justify-between">
-            <NavBar></NavBar>
             <div className="flex flex-col items-center justify-center flex-1">
                 {/* LOGO */}
                 <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center shadow-lg p-5 mb-3">
@@ -24,7 +21,6 @@ const Loading = () => {
                     <Lottie animationData={sandyLoading} loop={true} />
                 </div>
             </div>
-            <Footer></Footer>
         </div>
     );
 };
