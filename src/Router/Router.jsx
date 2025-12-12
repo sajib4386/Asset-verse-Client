@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home";
 import EmployeeRegister from "../Auth/EmployeeRegister";
 import HRRegister from "../Auth/HRRegister";
 import Login from "../Auth/Login";
+import NotFound from "../Components/NotFound/NotFound";
 
 export const router = createBrowserRouter([
     {
@@ -29,5 +30,9 @@ export const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path: "*",
+        Component: NotFound
+    }
 
 ]);
