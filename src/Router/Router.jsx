@@ -5,6 +5,7 @@ import EmployeeRegister from "../Auth/EmployeeRegister";
 import HRRegister from "../Auth/HRRegister";
 import Login from "../Auth/Login";
 import NotFound from "../Components/NotFound/NotFound";
+import AddAsset from "../DashBoard/HR/AddAsset";
 
 export const router = createBrowserRouter([
     {
@@ -27,12 +28,18 @@ export const router = createBrowserRouter([
             {
                 path: "/login",
                 Component: Login
+            },
+
+            // HR DashBoard
+            {
+                path: "/add-asset",
+                Component: AddAsset
             }
         ]
     },
     {
         path: "*",
         Component: NotFound
-    }
+    },
 
 ]);
