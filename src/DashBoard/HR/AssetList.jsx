@@ -1,18 +1,21 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Components/Loading/Loading";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import Swal from "sweetalert2";
 
 
 const AssetList = () => {
     const axiosSecure = useAxiosSecure();
     const { user, loading } = useAuth();
     const [search, setSearch] = useState("");
+    const assetMOdalRef = useRef()
+    const [selectedAsset, setSelectedAsset] = useState(null)
 
-    const { data: assets = [] } = useQuery({
+    const { data: assets = [], refetch: assetRefetch } = useQuery({
         queryKey: ["assets", user?.email, search],
         enabled: !!user?.email,
         queryFn: async () => {
@@ -21,9 +24,50 @@ const AssetList = () => {
         }
     });
 
+    const handleEditModal = (asset) => {
+        setSelectedAsset(asset);
+        assetMOdalRef.current.showModal();
+    };
+
+    const handleUpdateAsset = (e) => {
+        e.preventDefault();
+        const form = e.target;
+
+        const assetInfo = {
+            productName: form.updatedName.value,
+            productQuantity: parseInt(form.updatedQty.value),
+            productType: form.updatedType.value,
+            productImage: form.updatedImage.value
+        }
+        axiosSecure.patch(`/assets/${selectedAsset._id}`, assetInfo)
+            .then(res => {
+                if (res.data.modifiedCount) {
+                    assetMOdalRef.current.close();
+                    assetRefetch()
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Asset updated successfully.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                Swal.fire({
+                    title: "Error!",
+                    text: "Something went wrong while updating.",
+                    icon: "error",
+                });
+            })
+    }
+
     if (loading) {
         return <Loading></Loading>
     }
+
+
 
     return (
         <div className="p-6">
@@ -70,6 +114,7 @@ const AssetList = () => {
                                 </td>
                                 <td className="space-x-2">
                                     <button
+                                        onClick={() => handleEditModal(asset)}
                                         className="btn btn-sm btn-info"
                                     >
                                         <FaEdit />
@@ -91,6 +136,72 @@ const AssetList = () => {
                     </p>
                 )}
             </div>
+            {/* Edit Asset Modal */}
+            <dialog ref={assetMOdalRef} className="modal modal-bottom sm:modal-middle">
+                    <form onSubmit={handleUpdateAsset}
+                    className="max-w-5xl w-full flex justify-center items-center p-4"
+                    >
+                        <div className="modal-box">
+                            <h3 className="font-bold text-lg">Edit Asset</h3>
+                            {selectedAsset && (
+                                <>
+                                    <div className="mb-2">
+                                        <label className="block mb-1 font-medium">Asset Name</label>
+                                        <input
+                                            name="updatedName"
+                                            className="input input-bordered w-full"
+                                            defaultValue={selectedAsset.productName}
+                                        />
+                                    </div>
+
+                                    <div className="mb-2">
+                                        <label className="block mb-1 font-medium">Quantity</label>
+                                        <input
+                                            name="updatedQty"
+                                            type="number"
+                                            min="0"
+                                            className="input input-bordered w-full"
+                                            defaultValue={selectedAsset.productQuantity}
+                                        />
+                                    </div>
+
+                                    <div className="mb-2">
+                                        <label className="block mb-1 font-medium">Image URL</label>
+                                        <input
+                                            name="updatedImage"
+                                            className="input input-bordered w-full"
+                                            defaultValue={selectedAsset.productImage}
+                                        />
+                                    </div>
+
+                                    <div className="mb-2">
+                                        <label className="block mb-1 font-medium">Asset Type</label>
+                                        <select
+                                            name="updatedType"
+                                            className="input input-bordered w-full"
+                                            defaultValue={selectedAsset.productType}
+                                        >
+                                            <option>Returnable</option>
+                                            <option>Non-returnable</option>
+                                        </select>
+                                    </div>
+                                </>
+                            )}
+                            <div className="modal-action">
+                                <button type="submit" className="btn btn-secondary">
+                                    Update
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn btn-primary text-black"
+                                    onClick={() => assetMOdalRef.current.close()}
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+            </dialog>
         </div>
     );
 };
