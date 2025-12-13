@@ -43,7 +43,7 @@ const NavBar = () => {
         <>
             <li><NavLink to="/dashboard/my-assets">My Assets</NavLink></li>
             <li><NavLink to="/my-team">My Team</NavLink></li>
-            <li><NavLink to="/request-asset">Request Asset</NavLink></li>
+            <li><NavLink to="/dashboard/request-asset">Request Asset</NavLink></li>
             <li><NavLink to="/profile">Profile</NavLink></li>
             <li><button onClick={handleSignOut}>Logout</button></li>
         </>

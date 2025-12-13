@@ -10,6 +10,7 @@ import AddAsset from "../DashBoard/HR/AddAsset";
 import DashBoardHome from "../DashBoard/DashBoardHome/DashBoardHome";
 import MyAssets from "../DashBoard/Employee/MyAssets";
 import AssetList from "../DashBoard/HR/AssetList";
+import RequestAnAsset from "../DashBoard/Employee/RequestAnAsset";
 
 export const router = createBrowserRouter([
     {
@@ -54,9 +55,14 @@ export const router = createBrowserRouter([
 
             // Employe Route
             {
+                path: "/dashboard/request-asset",
+                Component: RequestAnAsset
+            },
+            {
                 path: "/dashboard/my-assets",
                 Component: MyAssets
             },
+
 
             // HR Route
             {

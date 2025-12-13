@@ -58,6 +58,13 @@ const DashboardLayout = () => {
                         {role === 'employee' && (
                             <>
                                 <li>
+                                    <NavLink to="/dashboard/request-asset" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Request Asset">
+                                        <FaListAlt />
+                                        <span className="is-drawer-close:hidden">Request Asset</span>
+                                    </NavLink>
+                                </li>
+
+                                <li>
                                     <NavLink to="/dashboard/my-assets" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Assets">
                                         <BsBoxSeam />
                                         <span className="is-drawer-close:hidden">My Assets</span>
@@ -68,13 +75,6 @@ const DashboardLayout = () => {
                                     <NavLink to="/my-team" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Team">
                                         <FaUsers />
                                         <span className="is-drawer-close:hidden">My Team</span>
-                                    </NavLink>
-                                </li>
-
-                                <li>
-                                    <NavLink to="/request-asset" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Request Asset">
-                                        <FaListAlt />
-                                        <span className="is-drawer-close:hidden">Request Asset</span>
                                     </NavLink>
                                 </li>
 
@@ -91,7 +91,7 @@ const DashboardLayout = () => {
                         {role === 'hr' && (
                             <>
                                 <li>
-                                    <NavLink to= "/dashboard/asset-list" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Asset List">
+                                    <NavLink to="/dashboard/asset-list" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Asset List">
                                         <MdInventory />
                                         <span className="is-drawer-close:hidden">Asset List</span>
                                     </NavLink>
