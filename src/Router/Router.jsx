@@ -11,6 +11,7 @@ import DashBoardHome from "../DashBoard/DashBoardHome/DashBoardHome";
 import MyAssets from "../DashBoard/Employee/MyAssets";
 import AssetList from "../DashBoard/HR/AssetList";
 import RequestAnAsset from "../DashBoard/Employee/RequestAnAsset";
+import AllRequests from "../DashBoard/HR/AllRequests";
 
 export const router = createBrowserRouter([
     {
@@ -72,6 +73,10 @@ export const router = createBrowserRouter([
             {
                 path: "/dashboard/asset-list",
                 element: <AssetList></AssetList>
+            },
+            {
+                path: "/dashboard/all-requests",
+                element: <AllRequests></AllRequests>
             }
         ]
     }

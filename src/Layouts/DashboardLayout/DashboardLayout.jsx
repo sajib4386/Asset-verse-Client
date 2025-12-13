@@ -105,7 +105,7 @@ const DashboardLayout = () => {
                                 </li>
 
                                 <li>
-                                    <NavLink to="/all-requests" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="All Requests">
+                                    <NavLink to="/dashboard/all-requests" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="All Requests">
                                         <FaListAlt />
                                         <span className="is-drawer-close:hidden">All Requests</span>
                                     </NavLink>

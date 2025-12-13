@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import hrImg from "../assets/HR.png";
 import useAuth from "../Hooks/useAuth";
@@ -9,11 +9,10 @@ import Swal from "sweetalert2";
 import Loading from "../Components/Loading/Loading";
 
 const HRRegister = () => {
-    const { createUser, updateUser } = useAuth();
+    const { createUser, updateUser, loading, setLoading } = useAuth();
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [loading, setLoading] = useState(false);
 
 
     const handleHRRegisterSubmit = (data) => {

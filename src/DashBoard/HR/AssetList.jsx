@@ -122,7 +122,7 @@ const AssetList = () => {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>SL NO</th>
                             <th>Asset Image</th>
                             <th>Name</th>
                             <th>Type</th>
