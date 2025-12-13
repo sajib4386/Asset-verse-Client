@@ -9,6 +9,7 @@ import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import AddAsset from "../DashBoard/HR/AddAsset";
 import DashBoardHome from "../DashBoard/DashBoardHome/DashBoardHome";
 import MyAssets from "../DashBoard/Employee/MyAssets";
+import AssetList from "../DashBoard/HR/AssetList";
 
 export const router = createBrowserRouter([
     {
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
             {
                 path: "/dashboard/add-asset",
                 element: <AddAsset></AddAsset>
+            },
+            {
+                path: "/dashboard/asset-list",
+                element: <AssetList></AssetList>
             }
         ]
     }

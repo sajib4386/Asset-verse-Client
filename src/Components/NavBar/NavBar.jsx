@@ -52,7 +52,7 @@ const NavBar = () => {
     // HR links
     const hrLinks = (
         <>
-            <li><NavLink to="/asset-list">Asset List</NavLink></li>
+            <li><NavLink to="/dashboard/asset-list">Asset List</NavLink></li>
             <li><NavLink to="/dashboard/add-asset">Add Asset</NavLink></li>
             <li><NavLink to="/all-requests">All Requests</NavLink></li>
             <li><NavLink to="/employee-list">Employee List</NavLink></li>
@@ -120,7 +120,7 @@ const NavBar = () => {
 
                             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
-                                    <img src={user.photoURL} alt="Profile" />
+                                    <img src={user?.photoURL} alt="Profile" />
                                 </div>
                             </label>
 

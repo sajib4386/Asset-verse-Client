@@ -91,7 +91,7 @@ const DashboardLayout = () => {
                         {role === 'hr' && (
                             <>
                                 <li>
-                                    <NavLink to="/asset-list" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Asset List">
+                                    <NavLink to= "/dashboard/asset-list" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Asset List">
                                         <MdInventory />
                                         <span className="is-drawer-close:hidden">Asset List</span>
                                     </NavLink>
