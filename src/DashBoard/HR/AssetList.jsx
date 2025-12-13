@@ -63,6 +63,41 @@ const AssetList = () => {
             })
     }
 
+
+    const handleAssetDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/assets/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount)
+                            assetRefetch();
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your Asset has been deleted.",
+                            icon: "success"
+                        });
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        Swal.fire({
+                            title: "Error!",
+                            text: "Something went wrong while deleting.",
+                            icon: "error"
+                        });
+                    });
+
+            }
+        });
+    }
+
     if (loading) {
         return <Loading></Loading>
     }
@@ -120,6 +155,7 @@ const AssetList = () => {
                                         <FaEdit />
                                     </button>
                                     <button
+                                        onClick={() => handleAssetDelete(asset._id)}
                                         className="btn btn-sm btn-error"
                                     >
                                         <RiDeleteBin5Fill />
@@ -138,69 +174,69 @@ const AssetList = () => {
             </div>
             {/* Edit Asset Modal */}
             <dialog ref={assetMOdalRef} className="modal modal-bottom sm:modal-middle">
-                    <form onSubmit={handleUpdateAsset}
+                <form onSubmit={handleUpdateAsset}
                     className="max-w-5xl w-full flex justify-center items-center p-4"
-                    >
-                        <div className="modal-box">
-                            <h3 className="font-bold text-lg">Edit Asset</h3>
-                            {selectedAsset && (
-                                <>
-                                    <div className="mb-2">
-                                        <label className="block mb-1 font-medium">Asset Name</label>
-                                        <input
-                                            name="updatedName"
-                                            className="input input-bordered w-full"
-                                            defaultValue={selectedAsset.productName}
-                                        />
-                                    </div>
+                >
+                    <div className="modal-box">
+                        <h3 className="font-bold text-lg">Edit Asset</h3>
+                        {selectedAsset && (
+                            <>
+                                <div className="mb-2">
+                                    <label className="block mb-1 font-medium">Asset Name</label>
+                                    <input
+                                        name="updatedName"
+                                        className="input input-bordered w-full"
+                                        defaultValue={selectedAsset?.productName}
+                                    />
+                                </div>
 
-                                    <div className="mb-2">
-                                        <label className="block mb-1 font-medium">Quantity</label>
-                                        <input
-                                            name="updatedQty"
-                                            type="number"
-                                            min="0"
-                                            className="input input-bordered w-full"
-                                            defaultValue={selectedAsset.productQuantity}
-                                        />
-                                    </div>
+                                <div className="mb-2">
+                                    <label className="block mb-1 font-medium">Quantity</label>
+                                    <input
+                                        name="updatedQty"
+                                        type="number"
+                                        min="0"
+                                        className="input input-bordered w-full"
+                                        defaultValue={selectedAsset?.productQuantity}
+                                    />
+                                </div>
 
-                                    <div className="mb-2">
-                                        <label className="block mb-1 font-medium">Image URL</label>
-                                        <input
-                                            name="updatedImage"
-                                            className="input input-bordered w-full"
-                                            defaultValue={selectedAsset.productImage}
-                                        />
-                                    </div>
+                                <div className="mb-2">
+                                    <label className="block mb-1 font-medium">Image URL</label>
+                                    <input
+                                        name="updatedImage"
+                                        className="input input-bordered w-full"
+                                        defaultValue={selectedAsset?.productImage}
+                                    />
+                                </div>
 
-                                    <div className="mb-2">
-                                        <label className="block mb-1 font-medium">Asset Type</label>
-                                        <select
-                                            name="updatedType"
-                                            className="input input-bordered w-full"
-                                            defaultValue={selectedAsset.productType}
-                                        >
-                                            <option>Returnable</option>
-                                            <option>Non-returnable</option>
-                                        </select>
-                                    </div>
-                                </>
-                            )}
-                            <div className="modal-action">
-                                <button type="submit" className="btn btn-secondary">
-                                    Update
-                                </button>
-                                <button
-                                    type="button"
-                                    className="btn btn-primary text-black"
-                                    onClick={() => assetMOdalRef.current.close()}
-                                >
-                                    Close
-                                </button>
-                            </div>
+                                <div className="mb-2">
+                                    <label className="block mb-1 font-medium">Asset Type</label>
+                                    <select
+                                        name="updatedType"
+                                        className="input input-bordered w-full"
+                                        defaultValue={selectedAsset?.productType}
+                                    >
+                                        <option>Returnable</option>
+                                        <option>Non-returnable</option>
+                                    </select>
+                                </div>
+                            </>
+                        )}
+                        <div className="modal-action">
+                            <button type="submit" className="btn btn-secondary">
+                                Update
+                            </button>
+                            <button
+                                type="button"
+                                className="btn btn-primary text-black"
+                                onClick={() => assetMOdalRef.current.close()}
+                            >
+                                Close
+                            </button>
                         </div>
-                    </form>
+                    </div>
+                </form>
             </dialog>
         </div>
     );
