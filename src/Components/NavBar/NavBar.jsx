@@ -55,7 +55,7 @@ const NavBar = () => {
             <li><NavLink to="/dashboard/asset-list">Asset List</NavLink></li>
             <li><NavLink to="/dashboard/add-asset">Add Asset</NavLink></li>
             <li><NavLink to="/dashboard/all-requests">All Requests</NavLink></li>
-            <li><NavLink to="/employee-list">Employee List</NavLink></li>
+            <li><NavLink to="/dashboard/employee-list">Employee List</NavLink></li>
             <li><NavLink to="/profile">Profile</NavLink></li>
             <li><button onClick={handleSignOut}>Logout</button></li>
         </>

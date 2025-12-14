@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Components/Loading/Loading";
+import { useReactToPrint } from "react-to-print";
 
 const MyAssets = () => {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
+  const contentRef = useRef();
 
 
   const { data: assets = [] } = useQuery({
@@ -20,6 +22,11 @@ const MyAssets = () => {
 
     }
   });
+
+
+  const reactToPrintFn = useReactToPrint({ contentRef });
+
+
 
   if (loading) {
     return <Loading></Loading>
@@ -45,40 +52,50 @@ const MyAssets = () => {
           <option value="Returnable">Returnable</option>
           <option value="Non-returnable">Non-returnable</option>
         </select>
+
+
+        {/* Print Button */}
+        <button className="btn btn-info" onClick={reactToPrintFn}>
+          Print
+        </button>
       </div>
 
       {/* Table */}
-      <div>
+      <div ref={contentRef}>
         <table className="table table-zebra w-full">
           <thead>
             <tr>
+              <th>SL NO</th>
               <th>Image</th>
               <th>Asset Name</th>
               <th>Type</th>
               <th>Company</th>
-              <th>Assigned</th>
+              <th>Request Date</th>
+              <th>Approval Date</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {assets.map((asset) => (
+            {assets.map((asset, index) => (
               <tr key={asset._id}>
+                <td>{index + 1}</td>
                 <td>
                   <img src={asset?.assetImage} className="w-12 h-12 rounded" />
                 </td>
                 <td>{asset?.assetName}</td>
                 <td>{asset?.assetType}</td>
                 <td>{asset?.companyName}</td>
-                <td>{new Date(asset.assignmentDate).toLocaleString()}</td>
+                <td>{new Date(asset?.requestDate).toLocaleString()}</td>
+                <td>{new Date(asset?.approvalDate).toLocaleString()}</td>
 
                 <td>
-                  {asset?.status === "assigned" && (
-                    <span className="btn btn-sm btn-success text-black">Assigned</span>
+                  {asset?.status === "approved" && (
+                    <span className="btn btn-sm btn-success text-black">Approved</span>
                   )}
                 </td>
                 <td>
-                  {asset.status === "assigned" && asset.assetType === "Returnable" && (
+                  {asset?.status === "approved" && asset?.assetType === "Returnable" && (
                     <button
                       className="btn btn-sm btn-warning"
                     >
@@ -90,6 +107,11 @@ const MyAssets = () => {
             ))}
           </tbody>
         </table>
+        {assets?.length === 0 && (
+          <p className="text-center py-4 text-gray-500">
+            No assets found
+          </p>
+        )}
       </div>
     </div>
   );

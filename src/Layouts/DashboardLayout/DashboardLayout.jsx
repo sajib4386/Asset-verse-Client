@@ -112,7 +112,7 @@ const DashboardLayout = () => {
                                 </li>
 
                                 <li>
-                                    <NavLink to="/employee-list" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Employee List">
+                                    <NavLink to="/dashboard/employee-list" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Employee List">
                                         <FaUsers />
                                         <span className="is-drawer-close:hidden">Employee List</span>
                                     </NavLink>
