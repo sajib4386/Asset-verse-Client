@@ -3,7 +3,7 @@ import useRole from '../../Hooks/useRole';
 import { Link, NavLink, Outlet } from 'react-router';
 import { BsBoxSeam } from 'react-icons/bs';
 import { FaListAlt, FaUserCog, FaUsers } from 'react-icons/fa';
-import { MdAddCircle, MdInventory } from 'react-icons/md';
+import { MdAddCircle, MdInventory, MdOutlinePayment } from 'react-icons/md';
 import useAuth from '../../Hooks/useAuth';
 import Loading from '../../Components/Loading/Loading';
 
@@ -122,6 +122,13 @@ const DashboardLayout = () => {
                                     <NavLink to="/profile" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Profile">
                                         <FaUserCog />
                                         <span className="is-drawer-close:hidden">Profile</span>
+                                    </NavLink>
+                                </li>
+
+                                <li>
+                                    <NavLink to="/dashboard/upgradepackage" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Upgrade Package">
+                                        <MdOutlinePayment />
+                                        <span className="is-drawer-close:hidden">Upgrade Package</span>
                                     </NavLink>
                                 </li>
                             </>

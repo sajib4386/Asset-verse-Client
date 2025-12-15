@@ -117,7 +117,7 @@ const AllRequests = () => {
                     </thead>
 
                     <tbody>
-                        {requests.map((req,index) => (
+                        {requests.map((req, index) => (
                             <tr key={req._id}>
                                 <td>{index + 1}</td>
                                 <td>{req?.requesterName}</td>

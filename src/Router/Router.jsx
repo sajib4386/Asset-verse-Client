@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router";
 import RootLayOut from "../Layouts/RootLayOut/RootLayOut";
-import Home from "../Pages/Home/Home";
 import EmployeeRegister from "../Auth/EmployeeRegister";
 import HRRegister from "../Auth/HRRegister";
 import Login from "../Auth/Login";
@@ -13,6 +12,9 @@ import AssetList from "../DashBoard/HR/AssetList";
 import RequestAnAsset from "../DashBoard/Employee/RequestAnAsset";
 import AllRequests from "../DashBoard/HR/AllRequests";
 import MyEmployeeList from "../DashBoard/HR/MyEmployeeList";
+import UpgradePackage from "../DashBoard/Payments/UpgradePackage";
+import Home from "../Components/Home/Home";
+import PaymentSuccess from "../DashBoard/Payments/PaymentSuccess";
 
 export const router = createBrowserRouter([
     {
@@ -54,6 +56,10 @@ export const router = createBrowserRouter([
                 index: true,
                 Component: DashBoardHome
             },
+            {
+                path: "/dashboard/hr/payment-success",
+                Component: PaymentSuccess
+            },
 
             // Employe Route
             {
@@ -82,6 +88,10 @@ export const router = createBrowserRouter([
             {
                 path: "/dashboard/employee-list",
                 element: <MyEmployeeList></MyEmployeeList>
+            },
+            {
+                path: "/dashboard/upgradepackage",
+                element: <UpgradePackage></UpgradePackage>
             }
         ]
     }
