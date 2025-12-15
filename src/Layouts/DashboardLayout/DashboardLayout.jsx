@@ -2,7 +2,7 @@ import React from 'react'
 import useRole from '../../Hooks/useRole';
 import { Link, NavLink, Outlet } from 'react-router';
 import { BsBoxSeam } from 'react-icons/bs';
-import { FaListAlt, FaUserCog, FaUsers } from 'react-icons/fa';
+import { FaHistory, FaListAlt, FaUserCog, FaUsers } from 'react-icons/fa';
 import { MdAddCircle, MdInventory, MdOutlinePayment } from 'react-icons/md';
 import useAuth from '../../Hooks/useAuth';
 import Loading from '../../Components/Loading/Loading';
@@ -72,7 +72,7 @@ const DashboardLayout = () => {
                                 </li>
 
                                 <li>
-                                    <NavLink to="/my-team" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Team">
+                                    <NavLink to="/dashboard/my-team" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Team">
                                         <FaUsers />
                                         <span className="is-drawer-close:hidden">My Team</span>
                                     </NavLink>
@@ -129,6 +129,13 @@ const DashboardLayout = () => {
                                     <NavLink to="/dashboard/upgradepackage" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Upgrade Package">
                                         <MdOutlinePayment />
                                         <span className="is-drawer-close:hidden">Upgrade Package</span>
+                                    </NavLink>
+                                </li>
+
+                                <li>
+                                    <NavLink to="/dashboard/payment-history" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Upgrade Package">
+                                        <FaHistory />
+                                        <span className="is-drawer-close:hidden">Payment History</span>
                                     </NavLink>
                                 </li>
                             </>

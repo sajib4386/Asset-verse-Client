@@ -15,6 +15,8 @@ import MyEmployeeList from "../DashBoard/HR/MyEmployeeList";
 import UpgradePackage from "../DashBoard/Payments/UpgradePackage";
 import Home from "../Components/Home/Home";
 import PaymentSuccess from "../DashBoard/Payments/PaymentSuccess";
+import PaymentHistory from "../DashBoard/Payments/PaymentHistory";
+import MyTeam from "../DashBoard/Employee/MyTeam";
 
 export const router = createBrowserRouter([
     {
@@ -60,6 +62,10 @@ export const router = createBrowserRouter([
                 path: "/dashboard/hr/payment-success",
                 Component: PaymentSuccess
             },
+            {
+                path: "/dashboard/payment-history",
+                Component: PaymentHistory
+            },
 
             // Employe Route
             {
@@ -69,6 +75,10 @@ export const router = createBrowserRouter([
             {
                 path: "/dashboard/my-assets",
                 Component: MyAssets
+            },
+            {
+                path: "/dashboard/my-team",
+                Component: MyTeam
             },
 
 
