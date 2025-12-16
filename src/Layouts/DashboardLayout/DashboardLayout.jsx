@@ -79,7 +79,7 @@ const DashboardLayout = () => {
                                 </li>
 
                                 <li>
-                                    <NavLink to="/profile" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Profile">
+                                    <NavLink to="/dashboard/profile" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Profile">
                                         <FaUserCog />
                                         <span className="is-drawer-close:hidden">Profile</span>
                                     </NavLink>
@@ -119,7 +119,7 @@ const DashboardLayout = () => {
                                 </li>
 
                                 <li>
-                                    <NavLink to="/profile" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Profile">
+                                    <NavLink to="/dashboard/profile" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Profile">
                                         <FaUserCog />
                                         <span className="is-drawer-close:hidden">Profile</span>
                                     </NavLink>

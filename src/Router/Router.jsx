@@ -17,6 +17,7 @@ import Home from "../Components/Home/Home";
 import PaymentSuccess from "../DashBoard/Payments/PaymentSuccess";
 import PaymentHistory from "../DashBoard/Payments/PaymentHistory";
 import MyTeam from "../DashBoard/Employee/MyTeam";
+import MyProfile from "../DashBoard/Profile/Profile";
 
 export const router = createBrowserRouter([
     {
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
             {
                 path: "/dashboard/payment-history",
                 Component: PaymentHistory
+            },
+            {
+                path: "/dashboard/profile",
+                element: <MyProfile></MyProfile>
             },
 
             // Employe Route

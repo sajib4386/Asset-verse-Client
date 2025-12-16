@@ -44,7 +44,7 @@ const NavBar = () => {
             <li><NavLink to="/dashboard/my-assets">My Assets</NavLink></li>
             <li><NavLink to="/dashboard/my-team">My Team</NavLink></li>
             <li><NavLink to="/dashboard/request-asset">Request Asset</NavLink></li>
-            <li><NavLink to="/profile">Profile</NavLink></li>
+            <li><NavLink to="/dashboard/profile">Profile</NavLink></li>
             <li><button onClick={handleSignOut}>Logout</button></li>
         </>
     );
@@ -56,7 +56,7 @@ const NavBar = () => {
             <li><NavLink to="/dashboard/add-asset">Add Asset</NavLink></li>
             <li><NavLink to="/dashboard/all-requests">All Requests</NavLink></li>
             <li><NavLink to="/dashboard/employee-list">Employee List</NavLink></li>
-            <li><NavLink to="/profile">Profile</NavLink></li>
+            <li><NavLink to="/dashboard/profile">Profile</NavLink></li>
             <li><button onClick={handleSignOut}>Logout</button></li>
         </>
     );
