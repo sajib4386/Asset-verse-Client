@@ -36,27 +36,31 @@ const Footer = () => {
         </div>
 
 
-        {/* Quick navigation links */}
-        <div>
-          <h3 className="footer-title text-white mb-3">Quick Links</h3>
-          <ul className="flex flex-col gap-2 text-gray-300">
-            <li><a className="link link-hover">Dashboard</a></li>
-            <li><a className="link link-hover">Assets</a></li>
-            <li><a className="link link-hover">Employees</a></li>
-            <li><a className="link link-hover">Reports</a></li>
-          </ul>
+        {/* Quick Links & Company */}
+        <div className="grid grid-cols-2 gap-6 md:col-span-2">
+
+          <div>
+            <h3 className="footer-title text-white mb-3">Quick Links</h3>
+            <ul className="flex flex-col gap-2 text-gray-300">
+              <li><a className="link link-hover">Dashboard</a></li>
+              <li><a className="link link-hover">Assets</a></li>
+              <li><a className="link link-hover">Employees</a></li>
+              <li><a className="link link-hover">Reports</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="footer-title text-white mb-3">Company</h3>
+            <ul className="flex flex-col gap-2 text-gray-300">
+              <li><a className="link link-hover">About Us</a></li>
+              <li><a className="link link-hover">Blog</a></li>
+              <li><a className="link link-hover">Careers</a></li>
+              <li><a className="link link-hover">Privacy Policy</a></li>
+            </ul>
+          </div>
+
         </div>
 
-        {/* Company */}
-        <div>
-          <h3 className="footer-title text-white mb-3">Company</h3>
-          <ul className="flex flex-col gap-2 text-gray-300">
-            <li><a className="link link-hover">About Us</a></li>
-            <li><a className="link link-hover">Blog</a></li>
-            <li><a className="link link-hover">Careers</a></li>
-            <li><a className="link link-hover">Privacy Policy</a></li>
-          </ul>
-        </div>
 
         {/* NewsLetter */}
         <div>
@@ -65,11 +69,11 @@ const Footer = () => {
             Subscribe to get the latest updates and news from AssetVerse.
           </p>
 
-          <div className="flex gap-2 mt-2 ">
+          <div className="flex gap-2 mt-2 flex-wrap">
             <input
               type="email"
               placeholder="Enter your email"
-              className="input input-bordered w-full bg-gray-900 text-white border-gray-700 focus:border-rose-600"
+              className="input input-bordered w-auto bg-gray-900 text-white border-gray-700 focus:border-rose-600"
             />
             <button className="btn bg-rose-600 border-none hover:bg-rose-700 px-5 text-white">
               Join

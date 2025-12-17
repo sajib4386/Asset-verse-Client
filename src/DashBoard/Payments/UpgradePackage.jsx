@@ -3,12 +3,13 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import useAuth from '../../Hooks/useAuth';
 import { GiConfirmed } from 'react-icons/gi';
+import Loading from '../../Components/Loading/Loading';
 
 
 
 const UpgradePackage = () => {
     const axiosSecure = useAxiosSecure()
-    const { user } = useAuth()
+    const { user, loading } = useAuth()
 
     const { data: packages = [] } = useQuery({
         queryKey: ["packages", user?.email],
@@ -28,6 +29,9 @@ const UpgradePackage = () => {
         window.location.assign(res.data.url);
     }
 
+    if (loading) {
+        return <Loading></Loading>
+    }
 
     return (
         <div className="min-h-screen bg-linear-to-r from-blue-50 via-purple-50 to-pink-50 py-16 px-6">

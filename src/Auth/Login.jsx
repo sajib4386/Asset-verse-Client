@@ -46,12 +46,12 @@ const Login = () => {
             <div className="bg-[#cae1f1] w-full max-w-lg p-5 lg:p-10 rounded-2xl border-2 border-amber-400 shadow-gray-500 shadow-lg">
 
                 {/* LOGO */}
-                <div className="flex justify-center mb-5">
+                <Link to="/" className="flex justify-center mb-5">
                     <div className="w-20 h-20 bg-secondary rounded-full flex items-center justify-center shadow-lg">
                         <span className="text-white text-3xl font-bold">A</span>
                         <span className="text-yellow-300 -ml-1 text-3xl font-bold">V</span>
                     </div>
-                </div>
+                </Link>
 
                 <h1 className="text-3xl text-center font-bold mb-1">
                     Welcome Back to

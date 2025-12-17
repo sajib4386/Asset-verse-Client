@@ -32,32 +32,32 @@ const NavBar = () => {
     // Public links
     const publicLinks = (
         <>
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/employee-register">Join as Employee</NavLink></li>
-            <li><NavLink to="/hr-register">Join as HR Manager</NavLink></li>
+            <li className='m-1'><NavLink to="/" className="nav-item">Home</NavLink></li>
+            <li className='m-1'><NavLink to="/employee-register" className="nav-item">Join as Employee</NavLink></li>
+            <li className='m-1'><NavLink to="/hr-register" className="nav-item">Join as HR Manager</NavLink></li>
         </>
     );
 
     // Employee links
     const employeeLinks = (
         <>
-            <li><NavLink to="/dashboard/my-assets">My Assets</NavLink></li>
-            <li><NavLink to="/dashboard/my-team">My Team</NavLink></li>
-            <li><NavLink to="/dashboard/request-asset">Request Asset</NavLink></li>
-            <li><NavLink to="/dashboard/profile">Profile</NavLink></li>
-            <li><button onClick={handleSignOut}>Logout</button></li>
+            <li className='hover:link'><NavLink to="/dashboard/my-assets">My Assets</NavLink></li>
+            <li className='hover:link'><NavLink to="/dashboard/my-team">My Team</NavLink></li>
+            <li className='hover:link'><NavLink to="/dashboard/request-asset">Request Asset</NavLink></li>
+            <li className='hover:link'><NavLink to="/dashboard/profile">Profile</NavLink></li>
+            <li><button onClick={handleSignOut} className='btn btn-primary text-black font-bold hover:bg-secondary hover:text-white'>Logout</button></li>
         </>
     );
 
     // HR links
     const hrLinks = (
         <>
-            <li><NavLink to="/dashboard/asset-list">Asset List</NavLink></li>
-            <li><NavLink to="/dashboard/add-asset">Add Asset</NavLink></li>
-            <li><NavLink to="/dashboard/all-requests">All Requests</NavLink></li>
-            <li><NavLink to="/dashboard/employee-list">Employee List</NavLink></li>
-            <li><NavLink to="/dashboard/profile">Profile</NavLink></li>
-            <li><button onClick={handleSignOut}>Logout</button></li>
+            <li className='hover:link'><NavLink to="/dashboard/asset-list">Asset List</NavLink></li>
+            <li className='hover:link'><NavLink to="/dashboard/add-asset">Add Asset</NavLink></li>
+            <li className='hover:link'><NavLink to="/dashboard/all-requests">All Requests</NavLink></li>
+            <li className='hover:link'><NavLink to="/dashboard/employee-list">Employee List</NavLink></li>
+            <li className='hover:link'><NavLink to="/dashboard/profile">Profile</NavLink></li>
+            <li><button onClick={handleSignOut} className='btn btn-primary text-black font-bold hover:bg-secondary hover:text-white'>Logout</button></li>
         </>
     );
 
@@ -65,7 +65,7 @@ const NavBar = () => {
     const roleLinks = user ? (role === 'employee' ? employeeLinks : hrLinks) : null;
 
     return (
-        <div className="navbar bg-base-100 shadow-sm px-4">
+        <div className="navbar bg-white shadow-sm px-4">
 
             <div className='navbar max-w-10/12 mx-auto'>
 
@@ -78,14 +78,14 @@ const NavBar = () => {
                         </label>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                            className="menu menu-sm dropdown-content mt-6 border-2 border-amber-200 p-2 shadow bg-base-100 rounded-box w-52">
 
-                            <li><NavLink to="/">Home</NavLink></li>
+                            <li className='m-1'><NavLink to="/" className="nav-item">Home</NavLink></li>
 
                             {!user &&
                                 <>
-                                    <li><NavLink to="/employee-register">Join as Employee</NavLink></li>
-                                    <li><NavLink to="/hr-register">Join as HR Manager</NavLink></li>
+                                    <li className='m-1'><NavLink to="/employee-register" className="nav-item">Join as Employee</NavLink></li>
+                                    <li className='m-1'><NavLink to="/hr-register" className="nav-item">Join as HR Manager</NavLink></li>
                                 </>
                             }
 
@@ -108,7 +108,7 @@ const NavBar = () => {
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
 
-                        {user ? <li><NavLink to="/">Home</NavLink></li> : publicLinks}
+                        {user ? <li><NavLink to="/" className="nav-item">Home</NavLink></li> : publicLinks}
 
                     </ul>
                 </div>
@@ -126,7 +126,7 @@ const NavBar = () => {
 
                             <ul
                                 tabIndex={0}
-                                className="dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                                className="dropdown-content mt-8 bg-[#f3faff] border-2 border-amber-200 p-2 rounded-box w-52 font-bold text-black">
 
                                 {roleLinks}
 

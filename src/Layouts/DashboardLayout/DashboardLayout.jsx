@@ -57,12 +57,6 @@ const DashboardLayout = () => {
                         {/* Employee Only */}
                         {role === 'employee' && (
                             <>
-                                <li>
-                                    <NavLink to="/dashboard/request-asset" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Request Asset">
-                                        <FaListAlt />
-                                        <span className="is-drawer-close:hidden">Request Asset</span>
-                                    </NavLink>
-                                </li>
 
                                 <li>
                                     <NavLink to="/dashboard/my-assets" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Assets">
@@ -70,6 +64,15 @@ const DashboardLayout = () => {
                                         <span className="is-drawer-close:hidden">My Assets</span>
                                     </NavLink>
                                 </li>
+
+                                <li>
+                                    <NavLink to="/dashboard/request-asset" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Request Asset">
+                                        <FaListAlt />
+                                        <span className="is-drawer-close:hidden">Request Asset</span>
+                                    </NavLink>
+                                </li>
+
+
 
                                 <li>
                                     <NavLink to="/dashboard/my-team" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Team">
@@ -114,14 +117,7 @@ const DashboardLayout = () => {
                                 <li>
                                     <NavLink to="/dashboard/employee-list" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Employee List">
                                         <FaUsers />
-                                        <span className="is-drawer-close:hidden">Employee List</span>
-                                    </NavLink>
-                                </li>
-
-                                <li>
-                                    <NavLink to="/dashboard/profile" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Profile">
-                                        <FaUserCog />
-                                        <span className="is-drawer-close:hidden">Profile</span>
+                                        <span className="is-drawer-close:hidden">MY Employee List</span>
                                     </NavLink>
                                 </li>
 
@@ -129,6 +125,13 @@ const DashboardLayout = () => {
                                     <NavLink to="/dashboard/upgradepackage" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Upgrade Package">
                                         <MdOutlinePayment />
                                         <span className="is-drawer-close:hidden">Upgrade Package</span>
+                                    </NavLink>
+                                </li>
+
+                                <li>
+                                    <NavLink to="/dashboard/profile" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Profile">
+                                        <FaUserCog />
+                                        <span className="is-drawer-close:hidden">Profile</span>
                                     </NavLink>
                                 </li>
 
