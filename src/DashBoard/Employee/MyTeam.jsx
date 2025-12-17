@@ -11,22 +11,27 @@ const MyTeam = () => {
     const { data: companies = [], isLoading: companiesLoading } = useQuery({
         queryKey: ["companies"],
         queryFn: async () => {
-            const res = await axiosSecure.get("/hr/companies");
+            const res = await axiosSecure.get("/employee/companies");
             return res.data;
         },
     });
 
     const { data: employees = [], isLoading: employeesLoading } = useQuery({
-        queryKey: ["employees", selectedCompany?._id],
+        queryKey: ["employees", selectedCompany?.hrEmail],
         enabled: !!selectedCompany,
         queryFn: async () => {
-            const res = await axiosSecure.get(`/hr/employee-list?hrEmail=${selectedCompany?.email}`);
+            const res = await axiosSecure.get(`/employee/my-team?hrEmail=${selectedCompany?.hrEmail}`);
             return Array.isArray(res.data) ? res.data : res.data.result || [];
         },
     });
 
     const currentMonth = new Date().getMonth() + 1;
-    const birthdays = employees.filter((emp) => new Date(emp.dateOfBirth).getMonth() + 1 === currentMonth);
+    const birthdays = employees.filter(
+        (emp) =>
+            emp.dateOfBirth &&
+            new Date(emp.dateOfBirth).getMonth() + 1 === currentMonth
+    );
+
 
 
     if (companiesLoading) {
@@ -53,7 +58,7 @@ const MyTeam = () => {
                 ))}
             </select>
 
-           {selectedCompany && employeesLoading && <Loading />}
+            {selectedCompany && employeesLoading && <Loading />}
 
             {/* Employee Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">

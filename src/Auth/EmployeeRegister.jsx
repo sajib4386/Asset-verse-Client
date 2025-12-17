@@ -3,16 +3,16 @@ import { useForm } from "react-hook-form";
 import employeeImg from "../assets/Employee.jpg";
 import useAuth from "../Hooks/useAuth";
 import axios from "axios";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useNavigate } from "react-router";
 import Loading from "../Components/Loading/Loading";
 import Swal from "sweetalert2";
+import useAxios from "../Hooks/useAxios";
 
 
 const EmployeeRegister = () => {
     const { createUser, updateUser, loading, setLoading } = useAuth();
-    const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
+    const axiosInstance = useAxios()
     const { register, handleSubmit, formState: { errors } } = useForm();
 
 
@@ -37,7 +37,7 @@ const EmployeeRegister = () => {
                             photoURL: photoURL
                         };
 
-                        axiosSecure.post("/register/employee", employeeInfo)
+                        axiosInstance.post("/register/employee", employeeInfo)
                             .then(res => {
                                 if (res.data.success) {
                                     updateUser({ displayName: data.name, photoURL })

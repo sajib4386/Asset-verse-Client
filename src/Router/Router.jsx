@@ -18,6 +18,8 @@ import PaymentSuccess from "../DashBoard/Payments/PaymentSuccess";
 import PaymentHistory from "../DashBoard/Payments/PaymentHistory";
 import MyTeam from "../DashBoard/Employee/MyTeam";
 import MyProfile from "../DashBoard/Profile/Profile";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -52,7 +54,7 @@ export const router = createBrowserRouter([
     // DashBoard Route
     {
         path: "/dashboard",
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
 
             {
@@ -65,14 +67,14 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/dashboard/payment-history",
-                Component: PaymentHistory
+                element: <AdminRoute><PaymentHistory></PaymentHistory></AdminRoute>
             },
             {
                 path: "/dashboard/profile",
                 element: <MyProfile></MyProfile>
             },
 
-            // Employe Route
+            // Employee Route
             {
                 path: "/dashboard/request-asset",
                 Component: RequestAnAsset
@@ -90,23 +92,23 @@ export const router = createBrowserRouter([
             // HR Route
             {
                 path: "/dashboard/add-asset",
-                element: <AddAsset></AddAsset>
+                element: <AdminRoute><AddAsset></AddAsset></AdminRoute>
             },
             {
                 path: "/dashboard/asset-list",
-                element: <AssetList></AssetList>
+                element: <AdminRoute><AssetList></AssetList></AdminRoute>
             },
             {
                 path: "/dashboard/all-requests",
-                element: <AllRequests></AllRequests>
+                element: <AdminRoute><AllRequests></AllRequests></AdminRoute>
             },
             {
                 path: "/dashboard/employee-list",
-                element: <MyEmployeeList></MyEmployeeList>
+                element: <AdminRoute><MyEmployeeList></MyEmployeeList></AdminRoute>
             },
             {
                 path: "/dashboard/upgradepackage",
-                element: <UpgradePackage></UpgradePackage>
+                element: <AdminRoute><UpgradePackage></UpgradePackage></AdminRoute>
             }
         ]
     }

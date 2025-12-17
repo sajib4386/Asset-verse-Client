@@ -2,15 +2,15 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import hrImg from "../assets/HR.png";
 import useAuth from "../Hooks/useAuth";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Loading from "../Components/Loading/Loading";
+import useAxios from "../Hooks/useAxios";
 
 const HRRegister = () => {
     const { createUser, updateUser, loading, setLoading } = useAuth();
-    const axiosSecure = useAxiosSecure();
+    const axiosInstance = useAxios()
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -51,7 +51,7 @@ const HRRegister = () => {
                                     companyLogo: companyLogoURL,
                                 };
 
-                                axiosSecure.post("/register/hr", hrInfo)
+                                axiosInstance.post("/register/hr", hrInfo)
                                     .then(res => {
                                         if (res.data.success) {
                                             updateUser({
