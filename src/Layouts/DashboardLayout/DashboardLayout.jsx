@@ -8,10 +8,10 @@ import useAuth from '../../Hooks/useAuth';
 import Loading from '../../Components/Loading/Loading';
 
 const DashboardLayout = () => {
-    const { role } = useRole();
+    const { role, roleLoading } = useRole();
     const { loading } = useAuth()
 
-    if (loading) {
+    if (loading || roleLoading) {
         return <Loading></Loading>
     }
 

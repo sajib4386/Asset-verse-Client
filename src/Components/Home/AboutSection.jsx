@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const AboutSection = () => {
     return (
-        <section className="py-20 bg-[#cae1f1]">
+        <section className="py-20 bg-[#f3faff]">
             <div className="container mx-auto px-6 text-center">
                 <motion.h2
                     className="text-4xl font-bold mb-6 text-black underline underline-offset-8"
@@ -64,7 +64,7 @@ const AboutSection = () => {
 
                     {/* Card 3 */}
                     <motion.div
-                         className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow shadow-gray-400 duration-300"
+                        className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow shadow-gray-400 duration-300"
                         whileHover={{ scale: 1.05 }}
                         initial={{ opacity: 0, y: 70 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -81,7 +81,7 @@ const AboutSection = () => {
 
                     {/* Card 4 */}
                     <motion.div
-                    className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow shadow-gray-400 duration-300"
+                        className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow shadow-gray-400 duration-300"
                         whileHover={{ scale: 1.05 }}
                         initial={{ opacity: 0, y: 70 }}
                         animate={{ opacity: 1, y: 0 }}

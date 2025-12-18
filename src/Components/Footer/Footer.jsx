@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaFacebook, FaGithub, FaLinkedin } from 'react-icons/fa'
+import { FaFacebook, FaGithub, FaLinkedin, FaRegCopyright } from 'react-icons/fa'
 import { FaSquareXTwitter } from 'react-icons/fa6'
 import { Link } from 'react-router'
 
@@ -92,9 +92,12 @@ const Footer = () => {
       </div>
 
       {/* Copyright information */}
-      <div className="text-center mt-12 pt-6 border-t border-gray-800">
-        <p className="text-sm text-white">
-          © 2025 AssetVerse — All rights reserved.
+      <div className="flex justify-center items-center gap-2 mt-12 pt-6 border-t border-gray-800 text-sm text-white">
+        <span>
+          <FaRegCopyright />
+        </span>
+        <p>
+          2025 AssetVerse — All rights reserved.
         </p>
       </div>
     </footer>

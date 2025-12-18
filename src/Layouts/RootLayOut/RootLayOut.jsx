@@ -9,7 +9,7 @@ const RootLayOut = () => {
   const { loading } = useAuth();
 
   if (loading) return <Loading />;
-  
+
   return (
     <div>
       <NavBar></NavBar>

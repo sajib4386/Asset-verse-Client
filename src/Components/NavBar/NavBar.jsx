@@ -3,10 +3,11 @@ import { Link, NavLink } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
 import useRole from '../../Hooks/useRole';
 import Swal from 'sweetalert2';
+import Loading from '../Loading/Loading';
 
 const NavBar = () => {
-    const { user, signOutUser } = useAuth();
-    const { role } = useRole();
+    const { user, signOutUser, loading } = useAuth();
+    const { role, roleLoading } = useRole();
 
     const handleSignOut = () => {
         signOutUser()
@@ -60,6 +61,11 @@ const NavBar = () => {
             <li><button onClick={handleSignOut} className='btn btn-primary text-black font-bold hover:bg-secondary hover:text-white'>Logout</button></li>
         </>
     );
+
+
+    if (loading || roleLoading) {
+        return <Loading></Loading>
+    }
 
 
     const roleLinks = user ? (role === 'employee' ? employeeLinks : hrLinks) : null;

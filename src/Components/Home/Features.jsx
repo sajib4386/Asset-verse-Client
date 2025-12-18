@@ -67,7 +67,7 @@ const Features = () => {
 
                     {/* Card 4 */}
                     <motion.div
-                         className="bg-amber-50 border-2 border-blue-300 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow shadow-gray-400 duration-300"
+                        className="bg-amber-50 border-2 border-blue-300 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow shadow-gray-400 duration-300"
                         whileHover={{ scale: 1.05 }}
                         initial={{ opacity: 0, y: 70 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -80,7 +80,7 @@ const Features = () => {
 
                     {/* Card 5*/}
                     <motion.div
-                         className="bg-amber-50 border-2 border-blue-300 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow shadow-gray-400 duration-300"
+                        className="bg-amber-50 border-2 border-blue-300 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow shadow-gray-400 duration-300"
                         whileHover={{ scale: 1.05 }}
                         initial={{ opacity: 0, y: 70 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -93,7 +93,7 @@ const Features = () => {
 
                     {/* Card 6 */}
                     <motion.div
-                         className="bg-amber-50 border-2 border-blue-300 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow shadow-gray-400 duration-300"
+                        className="bg-amber-50 border-2 border-blue-300 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow shadow-gray-400 duration-300"
                         whileHover={{ scale: 1.05 }}
                         initial={{ opacity: 0, y: 70 }}
                         animate={{ opacity: 1, y: 0 }}

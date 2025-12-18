@@ -9,7 +9,7 @@ import useAuth from "../../Hooks/useAuth";
 const AddAsset = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const axiosSecure = useAxiosSecure();
-    const {user,loading,setLoading} = useAuth()
+    const { user, loading, setLoading } = useAuth()
 
     const onSubmit = async (data) => {
         setLoading(true);
@@ -130,7 +130,7 @@ const AddAsset = () => {
                         defaultValue={user?.email}
                         readOnly
                     />
-                    
+
                     {errors.hrEmail && <p className="text-red-500 text-sm">Email is required</p>}
                 </div>
 

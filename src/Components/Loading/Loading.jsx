@@ -11,7 +11,7 @@ const Loading = () => {
                     <span className="text-white text-2xl font-bold">A</span>
                     <span className="text-yellow-300 -ml-1 text-2xl font-bold">V</span>
                 </div>
-                
+
                 <div className="text-2xl font-bold text-secondary">
                     <span className="text-rose-600">A</span>sset<span className="text-rose-600">V</span>erse
                 </div>

@@ -26,7 +26,7 @@ const PackagesSection = () => {
     }
 
     return (
-        <section className="py-20 bg-[#f3faff]">
+        <section className="py-20 bg-[#cae1f1]">
             <div className="max-w-6xl mx-auto px-4">
 
                 <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
