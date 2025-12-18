@@ -2,6 +2,7 @@ import React from "react";
 import img1 from "../../assets/sherlock.webp"
 import img2 from "../../assets/tomcruise.webp"
 import img3 from "../../assets/tommy-shelby.webp"
+import { FaStar } from "react-icons/fa";
 
 const Testimonials = () => {
     return (
@@ -23,14 +24,14 @@ const Testimonials = () => {
                     <div className="relative bg-white rounded-3xl px-8 pt-16 pb-10 text-center shadow-xl hover:scale-105 transition">
                         <div className="absolute -top-12 left-1/2 -translate-x-1/2">
                             <img
-                               src={img1}
+                                src={img1}
                                 alt=""
                                 className="w-24 h-24 rounded-full border-4 border-white shadow-md"
                             />
                         </div>
 
                         <div className="flex justify-center mt-4 mb-4 text-yellow-400 text-xl">
-                            ★★★★★
+                            <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
                         </div>
 
                         <p className="text-gray-600 mb-6">
@@ -54,7 +55,7 @@ const Testimonials = () => {
                         </div>
 
                         <div className="flex justify-center mt-4 mb-4 text-yellow-400 text-xl">
-                            ★★★★★
+                            <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
                         </div>
 
                         <p className="text-gray-600 mb-6">
@@ -78,7 +79,7 @@ const Testimonials = () => {
                         </div>
 
                         <div className="flex justify-center mt-4 mb-4 text-yellow-400 text-xl">
-                            ★★★★★
+                            <FaStar /> <FaStar /> <FaStar /> <FaStar /> <FaStar />
                         </div>
 
                         <p className="text-gray-600 mb-6">
