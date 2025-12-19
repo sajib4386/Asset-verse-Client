@@ -8,7 +8,7 @@ const AllRequests = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
 
-    const { data: requests = [], refetch } = useQuery({
+    const { data: requests = [], refetch: requestRefetch } = useQuery({
         queryKey: ["allRequests", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/requests/hr?hrEmail=${user?.email}`);
@@ -32,12 +32,12 @@ const AllRequests = () => {
                 axiosSecure.patch(`/requests/approve/${id}`)
                     .then((res) => {
                         if (res.data.success) {
+                            requestRefetch()
                             Swal.fire({
                                 title: "Approved!",
                                 text: "Request has been approved.",
                                 icon: "success"
                             });
-                            refetch();
                         } else {
                             Swal.fire({
                                 title: "Error!",
@@ -73,12 +73,12 @@ const AllRequests = () => {
                 axiosSecure.patch(`/requests/reject/${id}`)
                     .then((res) => {
                         if (res.data.success) {
+                            requestRefetch()
                             Swal.fire({
                                 title: "Rejected!",
                                 text: "Request has been rejected.",
                                 icon: "success"
                             });
-                            refetch();
                         } else {
                             Swal.fire({
                                 title: "Error!",
@@ -100,12 +100,12 @@ const AllRequests = () => {
 
 
     return (
-        <div className="p-6">
-            <h2 className="text-2xl font-bold mb-4">All Asset Requests: {requests.length}</h2>
+        <div className="p-6 bg-[#cae1f1] min-h-screen">
+            <h2 className="text-2xl font-bold mb-4 text-center">All Asset Requests: {requests.length}</h2>
 
-            <div className="overflow-x-auto">
+            <div className="bg-white overflow-x-auto shadow-lg shadow-gray-500 rounded-xl">
                 <table className="table table-zebra">
-                    <thead>
+                    <thead className='bg-gray-100'>
                         <tr>
                             <th>SL NO</th>
                             <th>Employee</th>
@@ -135,7 +135,7 @@ const AllRequests = () => {
                                     )}
                                 </td>
 
-                                <td className="space-x-2">
+                                <td className="space-y-2 md:space-y-0 md:space-x-2">
                                     {req?.requestStatus === "pending" && (
                                         <>
                                             <button

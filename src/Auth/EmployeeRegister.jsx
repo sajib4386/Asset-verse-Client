@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../Hooks/useAuth";
 import axios from "axios";
@@ -6,17 +6,20 @@ import { Link, useNavigate } from "react-router";
 import Loading from "../Components/Loading/Loading";
 import Swal from "sweetalert2";
 import useAxios from "../Hooks/useAxios";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 
 const EmployeeRegister = () => {
-    const { createUser, updateUser, loading, setLoading } = useAuth();
+    const { createUser, updateUser, loading } = useAuth();
     const navigate = useNavigate();
     const axiosInstance = useAxios()
+    const [submitLoading, setSubmitLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm();
 
 
     const handleRegisterSubmit = (data) => {
-        setLoading(true);
+        setSubmitLoading(true);
         const profileImg = data.photo[0];
 
         createUser(data.email, data.password)
@@ -41,7 +44,7 @@ const EmployeeRegister = () => {
                                 if (res.data.success) {
                                     updateUser({ displayName: data.name, photoURL })
                                         .then(() => {
-                                            setLoading(false);
+                                            setSubmitLoading(false);
                                             Swal.fire({
                                                 icon: "success",
                                                 title: "Registration Successful",
@@ -50,7 +53,7 @@ const EmployeeRegister = () => {
                                             navigate("/");
                                         })
                                         .catch(err => {
-                                            setLoading(false);
+                                            setSubmitLoading(false);
                                             Swal.fire({
                                                 icon: "error",
                                                 title: "Profile Update Failed",
@@ -58,7 +61,7 @@ const EmployeeRegister = () => {
                                             });
                                         });
                                 } else {
-                                    setLoading(false);
+                                    setSubmitLoading(false);
                                     Swal.fire({
                                         icon: "error",
                                         title: "Registration Failed",
@@ -67,7 +70,7 @@ const EmployeeRegister = () => {
                                 }
                             })
                             .catch(err => {
-                                setLoading(false);
+                                setSubmitLoading(false);
                                 Swal.fire({
                                     icon: "error",
                                     title: "Registration Error",
@@ -76,7 +79,7 @@ const EmployeeRegister = () => {
                             });
                     })
                     .catch(err => {
-                        setLoading(false);
+                        setSubmitLoading(false);
                         Swal.fire({
                             icon: "error",
                             title: "Image Upload Failed",
@@ -85,7 +88,7 @@ const EmployeeRegister = () => {
                     });
             })
             .catch(err => {
-                setLoading(false);
+                setSubmitLoading(false);
                 Swal.fire({
                     icon: "error",
                     title: "Account Creation Failed",
@@ -93,6 +96,12 @@ const EmployeeRegister = () => {
                 });
             });
     };
+
+    const handlePassword = (e) => {
+        e.preventDefault()
+        setShowPassword(!showPassword)
+    }
+
 
     if (loading) {
         return <Loading></Loading>
@@ -171,15 +180,20 @@ const EmployeeRegister = () => {
                     </div>
 
                     {/* PASSWORD */}
-                    <div>
+                    <div className="relative">
                         <label className="text-gray-700 text-sm font-medium">Password</label>
                         <input
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             className="w-full mt-1 px-4 py-3 rounded-xl bg-[#f3f6fa]
                                 border border-green-300 focus:outline-green-500 transition"
                             {...register("password", { required: true, minLength: 6 })}
                             placeholder="******"
                         />
+
+                        <button type="button" onClick={handlePassword} className="btn btn-xs absolute right-3 bottom-3">
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+
                         {errors.password?.type === "required" && (
                             <p className="text-red-500 text-sm">Password required</p>
                         )}
@@ -189,8 +203,11 @@ const EmployeeRegister = () => {
                     </div>
 
                     {/* SUBMIT */}
-                    <button className="btn bg-secondary text-white w-full mt-4 rounded-xl">
-                        Register as Employee
+                    <button
+                        type="submit"
+                        disabled={submitLoading}
+                        className="btn bg-secondary text-white w-full mt-4 rounded-xl">
+                        {submitLoading ? "Registering..." : "Register as Employee"}
                     </button>
                 </form>
             </div>

@@ -62,7 +62,7 @@ const MyEmployeeList = () => {
     }
 
     return (
-        <div className="p-6">
+        <div className="p-6 bg-[#f3faff] min-h-screen">
             <h2 className="text-2xl font-bold mb-4">
                 My Employees ({employees?.length})
             </h2>
@@ -73,7 +73,7 @@ const MyEmployeeList = () => {
 
             <div className="grid md:grid-cols-4 gap-4">
                 {employees.map(emp => (
-                    <div key={emp._id} className="card bg-white shadow p-4">
+                    <div key={emp._id} className="card bg-[#cae1f1] p-4 shadow-md shadow-gray-400 border-2 border-emerald-200">
                         <img
                             src={emp?.photoURL}
                             className="w-16 h-16 rounded-full mx-auto"
@@ -89,7 +89,7 @@ const MyEmployeeList = () => {
 
                         <button
                             onClick={() => handleEmployeeDelete(emp)}
-                            className="btn btn-sm btn-secondary mt-2 w-full"
+                            className="btn btn-sm btn-secondary mt-2 w-full shadow-md shadow-gray-400"
                         >
                             Remove from Team
                         </button>

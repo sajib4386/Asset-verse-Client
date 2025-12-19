@@ -16,9 +16,9 @@ const PaymentHistory = () => {
         }
     })
     return (
-        <div>
+        <div className='p-6   bg-[#cae1f1] min-h-screen'>
             <h3 className='text-3xl font-bold text-center m-5'>Payment History: {payments?.length}</h3>
-            <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+            <div className="overflow-x-auto rounded-box border border-base-content/5 bg-[#f3faff] shadow-md shadow-gray-400">
                 <table className="table">
                     {/* head */}
                     <thead>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../Hooks/useAuth";
 import { Link, useNavigate } from "react-router";
@@ -6,16 +6,19 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Loading from "../Components/Loading/Loading";
 import useAxios from "../Hooks/useAxios";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const HRRegister = () => {
-    const { createUser, updateUser, loading, setLoading } = useAuth();
+    const { createUser, updateUser, loading } = useAuth();
     const axiosInstance = useAxios()
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false)
+    const [submitLoading, setSubmitLoading] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
 
     const handleHRRegisterSubmit = (data) => {
-        setLoading(true);
+        setSubmitLoading(true);
 
         const profileImg = data.photo[0];
         const companyLogoImg = data.companyLogo[0];
@@ -58,7 +61,7 @@ const HRRegister = () => {
                                                 photoURL: profileURL
                                             })
                                                 .then(() => {
-                                                    setLoading(false);
+                                                    setSubmitLoading(false);
                                                     Swal.fire({
                                                         icon: "success",
                                                         title: "HR Registration Successful",
@@ -67,7 +70,7 @@ const HRRegister = () => {
                                                     navigate("/");
                                                 })
                                                 .catch(err => {
-                                                    setLoading(false);
+                                                    setSubmitLoading(false);
                                                     Swal.fire({
                                                         icon: "error",
                                                         title: "Profile Update Failed",
@@ -75,7 +78,7 @@ const HRRegister = () => {
                                                     });
                                                 });
                                         } else {
-                                            setLoading(false);
+                                            setSubmitLoading(false);
                                             Swal.fire({
                                                 icon: "error",
                                                 title: "Registration Failed",
@@ -84,7 +87,7 @@ const HRRegister = () => {
                                         }
                                     })
                                     .catch(err => {
-                                        setLoading(false);
+                                        setSubmitLoading(false);
                                         Swal.fire({
                                             icon: "error",
                                             title: "Registration Error",
@@ -94,7 +97,7 @@ const HRRegister = () => {
 
                             })
                             .catch(err => {
-                                setLoading(false);
+                                setSubmitLoading(false);
                                 Swal.fire({
                                     icon: "error",
                                     title: "Company Logo Upload Failed",
@@ -104,7 +107,7 @@ const HRRegister = () => {
 
                     })
                     .catch(err => {
-                        setLoading(false);
+                        setSubmitLoading(false);
                         Swal.fire({
                             icon: "error",
                             title: "Profile Photo Upload Failed",
@@ -114,7 +117,7 @@ const HRRegister = () => {
 
             })
             .catch(err => {
-                setLoading(false);
+                setSubmitLoading(false);
                 Swal.fire({
                     icon: "error",
                     title: "Account Creation Failed",
@@ -122,6 +125,11 @@ const HRRegister = () => {
                 });
             });
     };
+
+    const handlePassword = (e) => {
+        e.preventDefault()
+        setShowPassword(!showPassword)
+    }
 
     if (loading) {
         return <Loading></Loading>
@@ -200,15 +208,20 @@ const HRRegister = () => {
                     </div>
 
                     {/* Password */}
-                    <div>
+                    <div className="relative">
                         <label className="text-gray-700 text-sm font-medium">Password</label>
                         <input
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             className="w-full mt-1 px-4 py-3 rounded-xl bg-[#f3f6fa]
                                 border border-green-300 focus:outline-green-500 transition"
                             {...register("password", { required: true, minLength: 6 })}
                             placeholder="******"
                         />
+
+                        <button type="button" onClick={handlePassword} className="btn btn-xs absolute right-3 bottom-3">
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+
                         {errors.password?.type === "required" && (
                             <p className="text-red-500 text-sm">Password required</p>
                         )}
@@ -244,8 +257,11 @@ const HRRegister = () => {
 
 
                     {/* Submit */}
-                    <button className="btn bg-secondary text-white w-full mt-4 rounded-xl">
-                        Register as HR Manager
+                    <button
+                        type="submit"
+                        disabled={submitLoading}
+                        className="btn bg-secondary text-white w-full mt-4 rounded-xl">
+                        {submitLoading ? "Registering..." : "Register as HR Manager"}
                     </button>
                 </form>
             </div>

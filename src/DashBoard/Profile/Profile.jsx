@@ -100,106 +100,104 @@ const Profile = () => {
     }
 
     return (
-        <div className="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow">
-            <h2 className="text-2xl font-bold mb-6">My Profile</h2>
+        <div className="min-h-screen bg-gray-100 flex justify-center items-center p-6">
+            <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg p-8">
 
-            <form onSubmit={handleSubmit(handleUpdate)} className="space-y-4">
+                <h2 className="text-3xl font-bold text-center mb-8">My Profile</h2>
 
-                {/* Profile Photo */}
-                <div>
-                    <img
-                        src={profile?.photoURL}
-                        alt=""
-                        className="w-28 h-28 rounded-full mb-2"
-                    />
-                    <input
-                        className="file-input file-input-secondary"
-                        type="file"
-                        onChange={(e) => setPhotoFile(e.target.files[0])}
-                    />
-                </div>
+                <form onSubmit={handleSubmit(handleUpdate)} className="space-y-6">
 
-                {/* Name */}
-                <div>
-                    <label className="font-medium">Name</label>
-                    <input
-                        className="input input-bordered w-full"
-                        {...register("name", { required: "Name is required" })}
-                    />
-                    {errors.name && (<p className="text-red-500 text-sm"> {errors.name.message}</p>)}
-                </div>
-
-                {/* EMAIL */}
-                <div>
-                    <label className="font-medium">Email</label>
-                    <input
-                        className="input input-bordered w-full bg-gray-100"
-                        value={profile?.email}
-                        readOnly
-                    />
-                </div>
-
-                {/* Date of Birth */}
-                <div>
-                    <label className="font-medium">Date of Birth</label>
-                    <input
-                        type="date"
-                        className="input input-bordered w-full"
-                        {...register("dateOfBirth", { required: "Date of birth is required" })}
-                    />
-                    {errors.dateOfBirth && (<p className="text-red-500 text-sm"> {errors.dateOfBirth.message} </p>)}
-                </div>
-
-                <button
-                    className="btn btn-secondary"
-                    disabled={updating}
-                >
-                    {updating ? "Updating..." : "Update Profile"}
-                </button>
-            </form>
-
-
-            {
-                role === 'employee' &&
-                <>
-
-                    {/* Company Affiliations */}
-                    <div className="mt-8">
-                        <h3 className="text-xl font-semibold mb-3">
-                            Company Affiliations
-                        </h3>
-
-                        {affiliations.length === 0 && (
-                            <p className="text-gray-500">
-                                No active affiliation
-                            </p>
-                        )}
-                        {affiliations.map((affiliate) => (
-                            <div
-                                key={affiliate._id}
-                                className="border p-3 rounded mb-2 flex items-center gap-3"
-                            >
-                                <img
-                                    src={affiliate?.companyLogo}
-                                    alt="Company"
-                                    className="w-10 h-10"
-                                />
-                                <div>
-                                    <p className="font-medium">
-                                        {affiliate?.companyName}
-                                    </p>
-                                    <p className="text-sm text-gray-500">
-                                        Joined: {new Date(affiliate?.affiliationDate).toLocaleString()}
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
+                    {/* Profile Photo */}
+                    <div className="flex flex-col items-center">
+                        <img
+                            src={profile?.photoURL}
+                            alt=""
+                            className="w-32 h-32 rounded-full mb-3 border-2 border-gray-200"
+                        />
+                        <input
+                            className="file-input file-input-secondary w-full max-w-xs"
+                            type="file"
+                            onChange={(e) => setPhotoFile(e.target.files[0])}
+                        />
                     </div>
 
-                </>
-            }
+                    {/* Name */}
+                    <div>
+                        <label className="font-medium mb-1 block">Name</label>
+                        <input
+                            className="input input-bordered w-full"
+                            {...register("name", { required: "Name is required" })}
+                        />
+                        {errors.name && (
+                            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+                        )}
+                    </div>
 
+                    {/* Email */}
+                    <div>
+                        <label className="font-medium mb-1 block">Email</label>
+                        <input
+                            className="input input-bordered w-full bg-gray-100"
+                            value={profile?.email}
+                            readOnly
+                        />
+                    </div>
+
+                    {/* Date of Birth */}
+                    <div>
+                        <label className="font-medium mb-1 block">Date of Birth</label>
+                        <input
+                            type="date"
+                            className="input input-bordered w-full"
+                            {...register("dateOfBirth", { required: "Date of birth is required" })}
+                        />
+                        {errors.dateOfBirth && (
+                            <p className="text-red-500 text-sm mt-1">{errors.dateOfBirth.message}</p>
+                        )}
+                    </div>
+
+                    <button
+                        className="btn btn-secondary w-full"
+                        disabled={updating}
+                    >
+                        {updating ? "Updating..." : "Update Profile"}
+                    </button>
+                </form>
+
+                {/* Employee Affiliations */}
+                {role === 'employee' && (
+                    <div className="mt-10">
+                        <h3 className="text-2xl font-semibold mb-4 text-center">Company Affiliations</h3>
+
+                        {affiliations.length === 0 ? (
+                            <p className="text-center text-gray-500">No active affiliation</p>
+                        ) : (
+                            <div className="space-y-3">
+                                {affiliations.map((affiliate) => (
+                                    <div
+                                        key={affiliate._id}
+                                        className="flex items-center gap-4 p-4 border rounded-lg shadow-sm hover:shadow-md transition"
+                                    >
+                                        <img
+                                            src={affiliate?.companyLogo}
+                                            alt={affiliate?.companyName}
+                                            className="w-12 h-12 rounded-full object-cover"
+                                        />
+                                        <div>
+                                            <p className="font-medium">{affiliate?.companyName}</p>
+                                            <p className="text-sm text-gray-500">
+                                                Joined: {new Date(affiliate?.affiliationDate).toLocaleDateString()}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
         </div>
+
     );
 };
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
@@ -26,8 +26,13 @@ const AssetList = () => {
 
     const handleEditModal = (asset) => {
         setSelectedAsset(asset);
-        assetMOdalRef.current.showModal();
     };
+
+    useEffect(() => {
+        if (selectedAsset) {
+            assetMOdalRef.current.showModal();
+        }
+    }, [selectedAsset]);
 
     const handleUpdateAsset = (e) => {
         e.preventDefault();
@@ -105,22 +110,22 @@ const AssetList = () => {
 
 
     return (
-        <div className="p-6">
-            <h2 className="text-3xl font-bold mb-4">
+        <div className="p-6 bg-[#cae1f1] min-h-screen">
+            <h2 className="text-3xl font-bold mb-4 ml-20">
                 Asset List ({assets.length})
             </h2>
 
             <input
                 type="text"
                 placeholder="Search asset..."
-                className="input input-bordered mb-4 w-full max-w-sm"
+                className="input input-bordered mb-4 w-full max-w-sm rounded-2xl shadow-md shadow-amber-100"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
 
-            <div className="overflow-x-auto bg-white rounded shadow">
+            <div className="bg-white overflow-x-auto shadow-lg shadow-gray-500 rounded-xl">
                 <table className="table">
-                    <thead>
+                    <thead className='bg-gray-100'>
                         <tr>
                             <th>SL NO</th>
                             <th>Asset Image</th>
@@ -143,11 +148,24 @@ const AssetList = () => {
                                 </td>
                                 <td>{asset?.productName}</td>
                                 <td>{asset?.productType}</td>
-                                <td>{asset?.productQuantity}</td>
+                                <td>
+                                    <span className="text-green-600 font-bold">
+                                        {asset.availableQuantity}
+                                    </span>
+
+                                    <span className="mx-1 text-gray-500 text-xl">
+                                        /
+                                    </span>
+
+                                    <span className="text-red-500 font-bold">
+                                        {asset.productQuantity}
+                                    </span>
+                                </td>
+
                                 <td>
                                     {new Date(asset.createdAt).toLocaleString()}
                                 </td>
-                                <td className="space-x-2">
+                                <td className="space-x-2 space-y-2 md:space-y-0">
                                     <button
                                         onClick={() => handleEditModal(asset)}
                                         className="btn btn-sm btn-info"
@@ -173,7 +191,7 @@ const AssetList = () => {
                 )}
             </div>
             {/* Edit Asset Modal */}
-            <dialog ref={assetMOdalRef} className="modal modal-bottom sm:modal-middle">
+            <dialog key={selectedAsset?._id} ref={assetMOdalRef} className="modal modal-bottom sm:modal-middle">
                 <form onSubmit={handleUpdateAsset}
                     className="max-w-5xl w-full flex justify-center items-center p-4"
                 >
