@@ -39,7 +39,7 @@ const MyTeam = () => {
     }
 
     return (
-        <div className="p-6">
+        <div className="p-6 bg-[#f3faff] min-h-screen">
             <h2 className="text-2xl font-bold mb-4">My Team</h2>
 
             {/* Company selector */}
@@ -63,7 +63,7 @@ const MyTeam = () => {
             {/* Employee Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 {employees.map((emp) => (
-                    <div key={emp._id} className="card bg-base-100 shadow p-4">
+                    <div key={emp._id} className="bg-[#cae1f1] p-4 shadow-md shadow-gray-400 border-2 border-emerald-200">
                         <img
                             src={emp?.photoURL}
                             alt=""
@@ -79,7 +79,7 @@ const MyTeam = () => {
 
                 {/* Upcoming Birthdays */}
                 {birthdays.length > 0 && (
-                    <div className="card bg-yellow-50 shadow p-4">
+                    <div className="card bg-yellow-50 p-4 shadow-md shadow-gray-400 border-2 border-emerald-200">
                         <h3 className="text-xl font-semibold mb-2">Upcoming Birthdays</h3>
                         <ul className="list-disc ml-5">
                             {birthdays.map((emp) => (

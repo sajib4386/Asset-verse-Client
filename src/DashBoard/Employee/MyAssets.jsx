@@ -33,19 +33,19 @@ const MyAssets = () => {
   }
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold">My Assets</h2>
+    <div className="p-6 bg-[#cae1f1] min-h-screen">
+      <h2 className="text-2xl font-bold mb-2">My Assets: {assets.length}</h2>
 
       {/* Search & Filter */}
       <div className="flex gap-4 mb-4">
         <input
           type="text"
           placeholder="Search by asset name"
-          className="input input-bordered w-full max-w-xs"
+          className="input input-bordered w-full max-w-xs rounded-2xl shadow-md shadow-primary"
           onChange={(e) => setSearch(e.target.value)}
         />
         <select
-          className="select select-bordered"
+          className="select select-bordered rounded-2xl shadow-md shadow-primary"
           onChange={(e) => setFilter(e.target.value)}
         >
           <option value="All">All</option>
@@ -55,13 +55,13 @@ const MyAssets = () => {
 
 
         {/* Print Button */}
-        <button className="btn btn-info" onClick={reactToPrintFn}>
+        <button className="btn btn-info shadow-md shadow-gray-500" onClick={reactToPrintFn}>
           Print
         </button>
       </div>
 
       {/* Table */}
-      <div ref={contentRef}>
+      <div ref={contentRef} className="bg-white overflow-x-auto shadow-lg shadow-gray-500 rounded-xl">
         <table className="table table-zebra w-full">
           <thead>
             <tr>

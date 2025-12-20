@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 
 const DashboardLayout = () => {
     const { role, roleLoading } = useRole();
-    const { loading, signOutUser } = useAuth()
+    const { user, loading, signOutUser } = useAuth()
 
 
     const handleSignOut = () => {
@@ -43,17 +43,50 @@ const DashboardLayout = () => {
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
+
                 {/* Navbar */}
-                <nav className="navbar w-full bg-white shadow-lg shadow-gray-300">
-                    <label htmlFor="my-drawer-4" aria-label="open sidebar" className="btn btn-square btn-ghost">
-                        {/* Sidebar toggle icon */}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg>
-                    </label>
-                    <div className="px-4">AssetVerse Dashboard</div>
+                <nav className="navbar w-full bg-white shadow-lg shadow-gray-300 flex justify-between items-center">
+
+                    <div className='flex items-center'>
+                        <label htmlFor="my-drawer-4" aria-label="open sidebar" className="btn btn-square btn-ghost">
+                            {/* Sidebar toggle icon */}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-5"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg>
+                        </label>
+                        <div className="lg:text-xl font-mono font-semibold lg:font-bold text-fuchsia-600">Hello, {user?.displayName}</div>
+                    </div>
+
+
+                    {/* Profile */}
+                    {user &&
+                        <div className="dropdown dropdown-end mr-10">
+
+                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    <img referrerPolicy="no-referrer" src={user?.photoURL} alt="Profile" />
+                                </div>
+                            </label>
+
+                            <ul
+                                tabIndex={0}
+                                className="dropdown-content mt-8 bg-[#f3faff] border-2 border-amber-200 p-2 rounded-box w-52 font-bold text-black">
+                                {/* Dropdown */}
+                                <li>
+                                    <button onClick={handleSignOut}
+                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex items-center gap-2" data-tip="LogOut">
+                                        <FaSignOutAlt />
+                                        <span className="is-drawer-close:hidden">LogOut</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    }
                 </nav>
+
+
                 {/* Page content here */}
                 <Outlet></Outlet>
             </div>
+
 
             <div className="drawer-side is-drawer-close:overflow-visible bg-white shadow-lg shadow-gray-300">
                 <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
@@ -172,7 +205,7 @@ const DashboardLayout = () => {
                         {/* List item */}
                         <li>
                             <button onClick={handleSignOut}
-                            className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="LogOut">
+                                className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="LogOut">
                                 <FaSignOutAlt />
                                 <span className="is-drawer-close:hidden">LogOut</span>
                             </button>

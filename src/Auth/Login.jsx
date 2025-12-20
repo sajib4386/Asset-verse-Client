@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "../Hooks/useAuth";
 import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import Loading from "../Components/Loading/Loading";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
     const { signIn, loading, setLoading, setError } = useAuth();
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false)
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -35,6 +37,11 @@ const Login = () => {
                 });
             });
     };
+
+    const handlePassword = (e) => {
+        e.preventDefault()
+        setShowPassword(!showPassword)
+    }
 
     if (loading) {
         return <Loading></Loading>
@@ -80,15 +87,20 @@ const Login = () => {
                     </div>
 
                     {/* PASSWORD */}
-                    <div>
+                    <div className="relative">
                         <label className="text-gray-700 text-sm font-medium">Password</label>
                         <input
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             className="w-full mt-1 px-4 py-3 rounded-xl bg-[#f3f6fa]
                                 border border-green-300 focus:outline-green-500 transition"
                             {...register("password", { required: true })}
                             placeholder="******"
                         />
+
+                        <button type="button" onClick={handlePassword} className="btn btn-xs absolute right-3 bottom-3">
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+
                         {errors.password && <p className="text-red-500 text-sm">Password is required</p>}
                     </div>
 
