@@ -4,6 +4,7 @@ import { Link, NavLink, Outlet } from 'react-router';
 import { BsBoxSeam } from 'react-icons/bs';
 import { FaHistory, FaListAlt, FaSignOutAlt, FaUserCog, FaUsers } from 'react-icons/fa';
 import { MdAddCircle, MdInventory, MdOutlinePayment } from 'react-icons/md';
+import { SiGoogleanalytics } from "react-icons/si";
 import useAuth from '../../Hooks/useAuth';
 import Loading from '../../Components/Loading/Loading';
 import Swal from 'sweetalert2';
@@ -189,6 +190,13 @@ const DashboardLayout = () => {
                                     <NavLink to="/dashboard/payment-history" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History">
                                         <FaHistory />
                                         <span className="is-drawer-close:hidden">Payment History</span>
+                                    </NavLink>
+                                </li>
+
+                                <li>
+                                    <NavLink to="/dashboard/analytics" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Analytics">
+                                        <SiGoogleanalytics />
+                                        <span className="is-drawer-close:hidden">Analytics</span>
                                     </NavLink>
                                 </li>
                             </>

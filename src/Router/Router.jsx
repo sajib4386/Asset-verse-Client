@@ -21,6 +21,7 @@ import MyProfile from "../DashBoard/Profile/Profile";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import PaymentCancelled from "../DashBoard/Payments/PaymentCancelled";
+import Analytics from "../DashBoard/HR/Analytics";
 
 export const router = createBrowserRouter([
     {
@@ -114,6 +115,10 @@ export const router = createBrowserRouter([
             {
                 path: "/dashboard/upgradepackage",
                 element: <AdminRoute><UpgradePackage></UpgradePackage></AdminRoute>
+            },
+            {
+                path: "/dashboard/analytics",
+                element: <AdminRoute><Analytics></Analytics></AdminRoute>
             }
         ]
     }
