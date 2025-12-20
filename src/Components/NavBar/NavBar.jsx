@@ -132,7 +132,7 @@ const NavBar = () => {
 
                             <ul
                                 tabIndex={0}
-                                className="dropdown-content mt-8 bg-[#f3faff] border-2 border-amber-200 p-2 rounded-box w-52 font-bold text-black">
+                                className="dropdown-content mt-8 bg-[#f3faff] border-2 border-amber-200 p-2 rounded-box w-52 font-bold text-black space-y-2">
 
                                 {roleLinks}
 

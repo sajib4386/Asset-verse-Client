@@ -1,8 +1,11 @@
 import React from 'react'
+import AssetList from '../HR/AssetList'
 
 const HRDashBoardHome = () => {
   return (
-    <div>HRDashBoardHome</div>
+    <div>
+      <AssetList></AssetList>
+    </div>
   )
 }
 

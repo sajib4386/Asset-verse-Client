@@ -1,8 +1,11 @@
 import React from 'react'
+import MyAssets from '../Employee/MyAssets'
 
 const EmployeeDashBoardHome = () => {
   return (
-    <div>EmployeeDashBoardHome</div>
+    <div>
+      <MyAssets></MyAssets>
+    </div>
   )
 }
 

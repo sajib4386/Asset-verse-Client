@@ -9,7 +9,7 @@ import useAxios from "../Hooks/useAxios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const HRRegister = () => {
-    const { createUser, updateUser, loading } = useAuth();
+    const { createUser, updateUser, loading, user, setUser } = useAuth();
     const axiosInstance = useAxios()
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false)
@@ -61,6 +61,10 @@ const HRRegister = () => {
                                                 photoURL: profileURL
                                             })
                                                 .then(() => {
+                                                    setUser({
+                                                        ...user, displayName: data.name,
+                                                        photoURL: profileURL
+                                                    })
                                                     setSubmitLoading(false);
                                                     Swal.fire({
                                                         icon: "success",
@@ -68,6 +72,7 @@ const HRRegister = () => {
                                                         text: "Your HR Manager account has been created.",
                                                     });
                                                     navigate("/");
+                                                    window.location.reload()
                                                 })
                                                 .catch(err => {
                                                     setSubmitLoading(false);

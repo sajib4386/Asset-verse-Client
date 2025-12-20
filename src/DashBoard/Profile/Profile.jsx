@@ -8,7 +8,7 @@ import Loading from "../../Components/Loading/Loading";
 import useRole from "../../Hooks/useRole";
 
 const Profile = () => {
-    const { user, updateUser } = useAuth();
+    const { user, updateUser, setUser } = useAuth();
     const axiosSecure = useAxiosSecure();
     const { role } = useRole()
 
@@ -73,6 +73,19 @@ const Profile = () => {
             // update firebase
             await updateUser({
                 displayName: data.name,
+                photoURL
+            });
+
+            // Profile Update EveryWhere (Profile,Dashboard navbar,Navbar)
+            setUser({
+                ...user, displayName: data.name, photoURL
+            })
+
+            // UI Update
+            setProfile({
+                ...profile,
+                name: data.name,
+                dateOfBirth: data.dateOfBirth,
                 photoURL
             });
 

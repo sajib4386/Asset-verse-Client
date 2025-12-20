@@ -12,17 +12,27 @@ const AssetList = () => {
     const axiosSecure = useAxiosSecure();
     const { user, loading } = useAuth();
     const [search, setSearch] = useState("");
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [totalAssets, setTotalAssets] = useState(0);
+
+
     const assetMOdalRef = useRef()
     const [selectedAsset, setSelectedAsset] = useState(null)
 
-    const { data: assets = [], refetch: assetRefetch } = useQuery({
-        queryKey: ["assets", user?.email, search],
+
+    const { data, refetch: assetRefetch } = useQuery({
+        queryKey: ["assets", user?.email, search, page],
         enabled: !!user?.email,
         queryFn: async () => {
-            const res = await axiosSecure.get(`/assets?email=${user?.email}&search=${search}`);
-            return res.data;
+            const res = await axiosSecure.get(`/assets?email=${user?.email}&search=${search}&page=${page}&limit=10`
+            );
+            setTotalPages(res.data.totalPages);
+            setTotalAssets(res.data.total);
+            return res.data.data;
         }
     });
+
 
     const handleEditModal = (asset) => {
         setSelectedAsset(asset);
@@ -33,6 +43,10 @@ const AssetList = () => {
             assetMOdalRef.current.showModal();
         }
     }, [selectedAsset]);
+
+    useEffect(() => {
+        setPage(1);
+    }, [search]);
 
     const handleUpdateAsset = (e) => {
         e.preventDefault();
@@ -112,7 +126,7 @@ const AssetList = () => {
     return (
         <div className="p-6 bg-[#cae1f1] min-h-screen">
             <h2 className="text-3xl font-bold mb-4 ml-20">
-                Asset List ({assets.length})
+                Asset List ({totalAssets})
             </h2>
 
             <input
@@ -137,9 +151,9 @@ const AssetList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {assets.map((asset, index) => (
+                        {data?.map((asset, index) => (
                             <tr key={asset._id}>
-                                <td>{index + 1}</td>
+                                <td>{(page - 1) * 10 + index + 1}</td>
                                 <td>
                                     <img
                                         src={asset?.productImage}
@@ -184,12 +198,48 @@ const AssetList = () => {
                     </tbody>
                 </table>
 
-                {assets.length === 0 && (
+                {data?.length === 0 && (
                     <p className="text-center py-4 text-gray-500">
                         No assets found
                     </p>
                 )}
             </div>
+
+
+            {/* Pagination */}
+            <div className="flex justify-center gap-2 mt-4">
+                <button
+                    className="btn btn-sm btn-primary text-black"
+                    disabled={page === 1}
+                    onClick={() => setPage((prev) => prev - 1)}
+                >
+                    Previous
+                </button>
+
+                {[...Array(totalPages).keys()].map((i) => {
+                    const pageNumber = i + 1;
+                    return (
+                        <button
+                            key={pageNumber}
+                            className={`btn btn-sm ${page === pageNumber ? "btn-secondary" : ""}`}
+                            onClick={() => setPage(pageNumber)}
+                        >
+                            {pageNumber}
+                        </button>
+                    );
+                })}
+
+                <button
+                    className="btn btn-sm btn-primary text-black"
+                    disabled={page === totalPages}
+                    onClick={() => setPage((prev) => prev + 1)}
+                >
+                    Next
+                </button>
+            </div>
+
+
+
             {/* Edit Asset Modal */}
             <dialog key={selectedAsset?._id} ref={assetMOdalRef} className="modal modal-bottom sm:modal-middle">
                 <form onSubmit={handleUpdateAsset}

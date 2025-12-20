@@ -20,6 +20,7 @@ import MyTeam from "../DashBoard/Employee/MyTeam";
 import MyProfile from "../DashBoard/Profile/Profile";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
+import PaymentCancelled from "../DashBoard/Payments/PaymentCancelled";
 
 export const router = createBrowserRouter([
     {
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
             {
                 path: "/dashboard/payment-history",
                 element: <AdminRoute><PaymentHistory></PaymentHistory></AdminRoute>
+            },
+            {
+                path: "/dashboard/hr/payment-cancelled",
+                Component: PaymentCancelled
             },
             {
                 path: "/dashboard/profile",

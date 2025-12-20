@@ -10,7 +10,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 
 const EmployeeRegister = () => {
-    const { createUser, updateUser, loading } = useAuth();
+    const { createUser, updateUser, loading, user, setUser } = useAuth();
     const navigate = useNavigate();
     const axiosInstance = useAxios()
     const [submitLoading, setSubmitLoading] = useState(false);
@@ -44,6 +44,11 @@ const EmployeeRegister = () => {
                                 if (res.data.success) {
                                     updateUser({ displayName: data.name, photoURL })
                                         .then(() => {
+                                            setUser(
+                                                {
+                                                    ...user, displayName: data.name, photoURL
+                                                })
+
                                             setSubmitLoading(false);
                                             Swal.fire({
                                                 icon: "success",
@@ -51,6 +56,7 @@ const EmployeeRegister = () => {
                                                 text: "Your employee account has been created.",
                                             });
                                             navigate("/");
+                                            window.location.reload()
                                         })
                                         .catch(err => {
                                             setSubmitLoading(false);
