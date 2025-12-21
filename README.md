@@ -68,19 +68,19 @@ Live URL:
 
 ## Setup Instructions
 
-1. Clone the client repository
+1. Clone the client repository  
    git clone https://github.com/your-username/asset-verse-client.git
 
-2. Navigate to the project directory
+2. Navigate to the project directory  
    cd asset-verse-client
 
-3. Install all dependencies
+3. Install all dependencies  
    npm install
 
-4. Run the development server
+4. Run the development server  
    npm run dev
 
-5. Open the project in your browser
+5. Open the project in your browser  
    http://localhost:5173  
 
 ---  
