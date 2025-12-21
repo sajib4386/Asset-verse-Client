@@ -89,10 +89,10 @@ Live URL:
 
 Create a `.env` file in the root directory of the client project and add the following variables:
 
-VITE_API_KEY=your_firebase_api_key
-VITE_AUTH_DOMAIN=your_firebase_auth_domain
-VITE_PROJECT_ID=your_firebase_project_id
-VITE_STORAGE_BUCKET=your_firebase_storage_bucket
-VITE_MESSAGING_SENDER_ID=your_firebase_sender_id
-VITE_APP_ID=your_firebase_app_id
+VITE_API_KEY=your_firebase_api_key  
+VITE_AUTH_DOMAIN=your_firebase_auth_domain  
+VITE_PROJECT_ID=your_firebase_project_id  
+VITE_STORAGE_BUCKET=your_firebase_storage_bucket  
+VITE_MESSAGING_SENDER_ID=your_firebase_sender_id  
+VITE_APP_ID=your_firebase_app_id  
 VITE_IMAGE_HOST_KEY=your_imagebb_api_key
