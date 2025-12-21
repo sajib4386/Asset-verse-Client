@@ -10,7 +10,7 @@ The client application provides a modern, responsive, and role-based interface f
 ---
 
 ## Live Site
-Live URL:
+Live URL: https://asset-verse-client.web.app
 
 ---
 
