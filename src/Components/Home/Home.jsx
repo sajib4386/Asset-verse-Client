@@ -8,6 +8,7 @@ import FAQSection from './ExtraSection/FaqSection'
 import ContactCTA from './ExtraSection/ContactCTA'
 import PackagesSection from './PackagesSection'
 import ServiceSection from './ServiceSection'
+import NewsLetter from './ExtraSection/NewsLetter'
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
       <Testimonials></Testimonials>
       <HowItWorks></HowItWorks>
       <FAQSection></FAQSection>
+      <NewsLetter></NewsLetter>
       <ContactCTA></ContactCTA>
     </div>
   )
