@@ -45,7 +45,6 @@ const NavBar = () => {
             <li className='hover:link'><NavLink to="/dashboard/my-assets">My Assets</NavLink></li>
             <li className='hover:link'><NavLink to="/dashboard/my-team">My Team</NavLink></li>
             <li className='hover:link'><NavLink to="/dashboard/request-asset">Request Asset</NavLink></li>
-            <li className='hover:link'><NavLink to="/dashboard/profile">Profile</NavLink></li>
             <li><button onClick={handleSignOut} className='btn btn-primary text-black font-bold hover:bg-secondary hover:text-white'>Logout</button></li>
         </>
     );
@@ -57,7 +56,6 @@ const NavBar = () => {
             <li className='hover:link'><NavLink to="/dashboard/add-asset">Add Asset</NavLink></li>
             <li className='hover:link'><NavLink to="/dashboard/all-requests">All Requests</NavLink></li>
             <li className='hover:link'><NavLink to="/dashboard/employee-list">Employee List</NavLink></li>
-            <li className='hover:link'><NavLink to="/dashboard/profile">Profile</NavLink></li>
             <li><button onClick={handleSignOut} className='btn btn-primary text-black font-bold hover:bg-secondary hover:text-white'>Logout</button></li>
         </>
     );
@@ -71,9 +69,9 @@ const NavBar = () => {
     const roleLinks = user ? (role === 'employee' ? employeeLinks : hrLinks) : null;
 
     return (
-        <div className="navbar bg-white shadow-sm px-4">
+        <div className="navbar bg-white shadow-sm px-4 sticky top-0 z-50">
 
-            <div className='navbar max-w-10/12 mx-auto'>
+            <div className='navbar w-full mx-auto'>
 
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -132,9 +130,41 @@ const NavBar = () => {
 
                             <ul
                                 tabIndex={0}
-                                className="dropdown-content mt-8 bg-[#f3faff] border-2 border-amber-200 p-2 rounded-box w-52 font-bold text-black space-y-2">
+                                className="dropdown-content mt-8 bg-[#f3faff] border-2 border-amber-200 p-3 rounded-box w-64 text-black">
 
-                                {roleLinks}
+                                {/* Profile Header */}
+                                <li className="flex items-center gap-3 p-2 rounded-lg bg-amber-100">
+                                    <img
+                                        className="w-12 h-12 rounded-full border"
+                                        src={user?.photoURL}
+                                        alt=""
+                                    />
+
+                                    <div className="flex-1 text-left">
+                                        <p className="font-bold">
+                                            {user?.displayName}
+                                        </p>
+                                        <p className="text-sm text-gray-600 break-all">
+                                            {user?.email}
+                                        </p>
+                                    </div>
+                                </li>
+
+                                {/* Profile Button */}
+                                <li className="mt-2">
+                                    <Link
+                                        to="/dashboard/profile"
+                                        className="btn btn-sm bg-secondary text-white w-full"
+                                    >
+                                        View Profile
+                                    </Link>
+                                </li>
+
+                                <div className="my-2 border-t"></div>
+
+                                <div className="space-y-2 font-bold">
+                                    {roleLinks}
+                                </div>
 
                             </ul>
 
