@@ -7,6 +7,7 @@ import HowItWorks from './ExtraSection/HowitWorks'
 import FAQSection from './ExtraSection/FaqSection'
 import ContactCTA from './ExtraSection/ContactCTA'
 import PackagesSection from './PackagesSection'
+import ServiceSection from './ServiceSection'
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <AboutSection></AboutSection>
       <PackagesSection></PackagesSection>
       <Features></Features>
+      <ServiceSection></ServiceSection>
       <Testimonials></Testimonials>
       <HowItWorks></HowItWorks>
       <FAQSection></FAQSection>

@@ -52,7 +52,7 @@ const HeroBanner = () => {
                 transition={{ repeat: Infinity, duration: 1.5 }}
                 className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-gray-500 text-2xl"
             >
-               <CgScrollV className="text-4xl"/>
+                <CgScrollV className="text-4xl" />
             </motion.div>
 
         </section>
