@@ -10,7 +10,7 @@ import PackagesSection from './PackagesSection'
 
 const Home = () => {
   return (
-    <div>
+    <div className='bg-[#f3faff]'>
       <HeroBanner></HeroBanner>
       <AboutSection></AboutSection>
       <PackagesSection></PackagesSection>

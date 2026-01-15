@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const AboutSection = () => {
     return (
-        <section className="py-20 bg-[#f3faff]">
+        <section className="py-20 bg-[#f3faff] mt-20">
             <div className="container mx-auto px-6 text-center">
                 <motion.h2
                     className="text-4xl font-bold mb-6 text-black underline underline-offset-8"

@@ -1,10 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import heroImage from "../../assets/hero1.jpg";
+import { CgScrollV } from "react-icons/cg";
+
 
 const HeroBanner = () => {
     return (
-        <section className="bg-[#f3faff] p-20 border-t-2 border-t-gray-200 relative">
+        <section className="bg-[#f3faff] min-h-[60vh] max-h-[70vh] relative flex items-center">
             <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center px-4">
 
                 {/* Text */}
@@ -14,7 +16,7 @@ const HeroBanner = () => {
                     transition={{ duration: 2.5 }}
                     className="lg:w-1/2"
                 >
-                    <h1 className="text-xl sm:text-2xl md:text-4xl font-bold text-gray-900 mb-6 transition-colors duration-300 hover:text-rose-600">
+                    <h1 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mb-6 transition-colors duration-300 hover:text-rose-600">
                         Efficient HR & Asset Management for Your Company
                     </h1>
 
@@ -23,6 +25,7 @@ const HeroBanner = () => {
                         Manage and assign assets to employees effortlessly, reducing loss and improving operational efficiency.
                     </p>
                     <a
+                        href="#"
                         className="bg-rose-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 hover:scale-105 transform transition duration-300 shadow-md hover:shadow-lg"
                     >
                         Get Started
@@ -35,12 +38,23 @@ const HeroBanner = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 2.5 }}
                     whileHover={{ scale: 1.2 }}
-                    className="lg:w-1/2 mb-10 lg:mb-0"
+                    className="lg:w-1/2 mb-10 lg:mb-0 mt-20"
                 >
                     <img src={heroImage} alt="AssetVerse hero" className="w-full rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300" />
                 </motion.div>
 
             </div>
+
+            {/* Scroll Down Indicator */}
+            <motion.div
+                initial={{ opacity: 0, y: 0 }}
+                animate={{ opacity: 1, y: [0, 10, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5 }}
+                className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-gray-500 text-2xl"
+            >
+               <CgScrollV className="text-4xl"/>
+            </motion.div>
+
         </section>
     );
 };
