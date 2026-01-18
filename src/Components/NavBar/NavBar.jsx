@@ -34,6 +34,7 @@ const NavBar = () => {
     const publicLinks = (
         <>
             <li className='m-1'><NavLink to="/" className="nav-item">Home</NavLink></li>
+            <li className='m-1'><NavLink to="/all-assets" className="nav-item">Assets</NavLink></li>
             <li className='m-1'><NavLink to="/employee-register" className="nav-item">Join as Employee</NavLink></li>
             <li className='m-1'><NavLink to="/hr-register" className="nav-item">Join as HR Manager</NavLink></li>
         </>
@@ -85,6 +86,7 @@ const NavBar = () => {
                             className="menu menu-sm dropdown-content mt-6 border-2 border-amber-200 p-2 shadow bg-base-100 rounded-box w-52">
 
                             <li className='m-1'><NavLink to="/" className="nav-item">Home</NavLink></li>
+                            <li className='m-1'><NavLink to="/all-assets" className="nav-item">Assets</NavLink></li>
 
                             {!user &&
                                 <>
@@ -112,7 +114,11 @@ const NavBar = () => {
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
 
-                        {user ? <li><NavLink to="/" className="nav-item">Home</NavLink></li> : publicLinks}
+                        {user ?
+                            <>
+                                <li className='m-1'><NavLink to="/" className="nav-item">Home</NavLink></li>
+                                <li className='m-1'><NavLink to="/all-assets" className="nav-item">Assets</NavLink></li>
+                            </> : publicLinks}
 
                     </ul>
                 </div>

@@ -22,6 +22,7 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import PaymentCancelled from "../DashBoard/Payments/PaymentCancelled";
 import Analytics from "../DashBoard/HR/Analytics";
+import AllAsset from "../Components/AllAsset/AllAsset";
 
 export const router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
             {
                 path: "/login",
                 Component: Login
+            },
+            {
+                path: "/all-assets",
+                Component: AllAsset
             }
         ]
     },
