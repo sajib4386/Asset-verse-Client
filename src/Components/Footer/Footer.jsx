@@ -7,8 +7,9 @@ const Footer = () => {
   return (
     <footer className="bg-black text-base-content p-10">
 
-      <div className="max-w-10/12 mx-auto grid grid-cols-1 md:grid-cols-5 gap-10 px-4">
+      <div className="max-w-10/12 mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 px-4 md:justify-items-center justify-items-start">
 
+        {/* Logo & Contact */}
         <div className="md:col-span-2 p-6 rounded-xl bg-[#111111] border border-gray-800 shadow-lg">
 
           {/* Logo */}
@@ -31,38 +32,26 @@ const Footer = () => {
 
           {/* Contact */}
           <h4 className="text-white font-semibold mb-2">CONTACT</h4>
-          <p className="text-gray-300">Email: <a className="link" href="#">assetverse@gmail.com</a></p>
-          <p className="text-gray-300">Phone: <a className="link" href="#">+880 1234 567 89</a></p>
+          <p className="text-gray-300">
+            Email: <a className="link hover:text-rose-600 transition" href="mailto:assetverse@gmail.com">assetverse@gmail.com</a>
+          </p>
+          <p className="text-gray-300">
+            Phone: <a className="link hover:text-rose-600 transition" href="tel:+880123456789">+880 1234 567 89</a>
+          </p>
         </div>
 
-
-        {/* Quick Links & Company */}
-        <div className="grid grid-cols-2 gap-6 md:col-span-2">
-
-          <div>
-            <h3 className="footer-title text-white mb-3">Quick Links</h3>
-            <ul className="flex flex-col gap-2 text-gray-300">
-              <li><a className="link link-hover">Dashboard</a></li>
-              <li><a className="link link-hover">Assets</a></li>
-              <li><a className="link link-hover">Employees</a></li>
-              <li><a className="link link-hover">Reports</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="footer-title text-white mb-3">Company</h3>
-            <ul className="flex flex-col gap-2 text-gray-300">
-              <li><a className="link link-hover">About Us</a></li>
-              <li><a className="link link-hover">Blog</a></li>
-              <li><a className="link link-hover">Careers</a></li>
-              <li><a className="link link-hover">Privacy Policy</a></li>
-            </ul>
-          </div>
-
+        {/* Quick Links */}
+        <div>
+          <h3 className="footer-title text-white mb-3">Quick Links</h3>
+          <ul className="flex flex-col gap-2 text-gray-300">
+            <li><Link to="/" className="link link-hover hover:text-rose-600 transition">Home</Link></li>
+            <li><Link to="/assets" className="link link-hover hover:text-rose-600 transition">Assets</Link></li>
+            <li><Link to="/blogs" className="link link-hover hover:text-rose-600 transition">Blogs</Link></li>
+            <li><Link to="/contacts" className="link link-hover hover:text-rose-600 transition">Contacts</Link></li>
+          </ul>
         </div>
 
-
-        {/* NewsLetter */}
+        {/* Newsletter & Socials */}
         <div>
           <h3 className="footer-title text-white mb-3">Newsletter</h3>
           <p className="text-gray-400 text-sm mb-3">
@@ -82,26 +71,22 @@ const Footer = () => {
 
           {/* Social media links */}
           <div className="flex gap-4 mt-5 text-2xl text-white">
-            <a className="hover:text-rose-600 transition"><FaFacebook /></a>
-            <a className="hover:text-rose-600 transition"><FaLinkedin /></a>
-            <a className="hover:text-rose-600 transition"><FaSquareXTwitter /></a>
-            <a className="hover:text-rose-600 transition"><FaGithub /></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-rose-600 transition"><FaFacebook /></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-rose-600 transition"><FaLinkedin /></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-rose-600 transition"><FaSquareXTwitter /></a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-rose-600 transition"><FaGithub /></a>
           </div>
         </div>
 
       </div>
 
-      {/* Copyright information */}
+      {/* Copyright */}
       <div className="flex justify-center items-center gap-2 mt-12 pt-6 border-t border-gray-800 text-sm text-white">
-        <span>
-          <FaRegCopyright />
-        </span>
-        <p>
-          2025 AssetVerse — All rights reserved.
-        </p>
+        <FaRegCopyright />
+        <p>2025 AssetVerse — All rights reserved.</p>
       </div>
     </footer>
-  )
+  );
 }
 
-export default Footer
+export default Footer;
