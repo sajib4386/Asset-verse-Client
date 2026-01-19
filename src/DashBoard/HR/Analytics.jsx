@@ -23,9 +23,19 @@ const Analytics = () => {
         }
     });
 
-    if (pieLoading || barLoading) {
-        return <Loading />;
+    const { data: overview = {}, isLoading: overviewLoading } = useQuery({
+        queryKey: ['hr-overview-stats'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/hr/overview-stats');
+            return res.data;
+        }
+    });
+
+
+    if (pieLoading || barLoading || overviewLoading) {
+        return <Loading></Loading>;
     }
+
 
     return (
         <div className="p-6 bg-[#cae1f1] min-h-screen">
@@ -38,6 +48,31 @@ const Analytics = () => {
                     Overview of asset distribution & request trends
                 </p>
             </div>
+
+            {/* Overview Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+                <div className="bg-white rounded-2xl shadow-md p-6 text-center hover:shadow-xl transition">
+                    <h4 className="text-gray-500 text-sm">Total Employees</h4>
+                    <p className="text-3xl font-bold text-indigo-600 mt-2">
+                        {overview.totalEmployees}
+                    </p>
+                </div>
+
+                <div className="bg-white rounded-2xl shadow-md p-6 text-center hover:shadow-xl transition">
+                    <h4 className="text-gray-500 text-sm">Total Assets</h4>
+                    <p className="text-3xl font-bold text-green-600 mt-2">
+                        {overview.totalAssets}
+                    </p>
+                </div>
+
+                <div className="bg-white rounded-2xl shadow-md p-6 text-center hover:shadow-xl transition">
+                    <h4 className="text-gray-500 text-sm">Total Requests</h4>
+                    <p className="text-3xl font-bold text-rose-600 mt-2">
+                        {overview.totalRequests}
+                    </p>
+                </div>
+            </div>
+
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
