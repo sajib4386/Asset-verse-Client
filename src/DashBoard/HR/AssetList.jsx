@@ -164,7 +164,7 @@ const AssetList = () => {
                                 <td>{asset?.productType}</td>
                                 <td>
                                     <span className="text-green-600 font-bold">
-                                        {asset.availableQuantity}
+                                        {asset?.availableQuantity}
                                     </span>
 
                                     <span className="mx-1 text-gray-500 text-xl">
@@ -172,12 +172,12 @@ const AssetList = () => {
                                     </span>
 
                                     <span className="text-red-500 font-bold">
-                                        {asset.productQuantity}
+                                        {asset?.productQuantity}
                                     </span>
                                 </td>
 
                                 <td>
-                                    {new Date(asset.createdAt).toLocaleString()}
+                                    {new Date(asset?.createdAt).toLocaleString()}
                                 </td>
                                 <td className="space-x-2 space-y-2 md:space-y-0">
                                     <button

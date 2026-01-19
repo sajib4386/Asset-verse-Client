@@ -11,13 +11,25 @@ const RequestAnAsset = () => {
     const [selectedAsset, setSelectedAsset] = useState(null);
     const [note, setNote] = useState("");
 
-    const { data: assets = [], isLoading } = useQuery({
-        queryKey: ["employeeAssets"],
+    const [search, setSearch] = useState("");
+    const [type, setType] = useState("");
+    const [sort, setSort] = useState("newest");
+    const [page, setPage] = useState(1);
+    const [dateFilter, setDateFilter] = useState("");
+    const limit = 12;
+
+
+    const { data = {}, isLoading } = useQuery({
+        queryKey: ["employeeAssets", search, type, sort, dateFilter, page],
         queryFn: async () => {
-            const res = await axiosSecure.get("/employee/assets");
+            const res = await axiosSecure.get(`/employee/assets?search=${search}&type=${type}&sort=${sort}&dateFilter=${dateFilter}&page=${page}&limit=${limit}`);
             return res.data;
         }
     });
+
+
+    const totalPages = Math.ceil((data.total || 0) / limit);
+
 
     const handleRequest = () => {
         const requestData = {
@@ -60,8 +72,59 @@ const RequestAnAsset = () => {
     return (
         <div className="p-6 bg-[#f3faff]">
             <h2 className="text-3xl font-bold mb-6 text-center">
-                Available Assets: {assets.length}
+                Available Assets: {data.assets?.length}
             </h2>
+
+            <div className="flex flex-wrap gap-4 justify-center mb-6">
+                <input
+                    type="text"
+                    placeholder="Search by name"
+                    className="input input-bordered"
+                    value={search}
+                    onChange={(e) => {
+                        setSearch(e.target.value);
+                        setPage(1);
+                    }}
+                />
+
+                <select
+                    className="select select-bordered"
+                    value={type}
+                    onChange={(e) => {
+                        setType(e.target.value);
+                        setPage(1);
+                    }}
+                >
+                    <option value="">All Types</option>
+                    <option value="Returnable">Returnable</option>
+                    <option value="Non-returnable">Non-Returnable</option>
+                </select>
+
+                <select
+                    className="select select-bordered"
+                    value={sort}
+                    onChange={(e) => setSort(e.target.value)}
+                >
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                </select>
+
+                {/* Date Filter */}
+                <select
+                    className="select select-bordered"
+                    value={dateFilter}
+                    onChange={(e) => {
+                        setDateFilter(e.target.value);
+                        setPage(1);
+                    }}
+                >
+                    <option value="">All Dates</option>
+                    <option value="7">Last 7 Days</option>
+                    <option value="30">Last 30 Days</option>
+                    <option value="90">Last 90 Days</option>
+                </select>
+            </div>
+
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
@@ -88,7 +151,7 @@ const RequestAnAsset = () => {
                 ))}
 
                 {/* Asset Cards */}
-                {!isLoading && assets.map(asset => (
+                {!isLoading && data.assets?.map(asset => (
                     <div key={asset._id} className="card bg-base-100 shadow">
                         {/* Image */}
                         <figure>
@@ -98,21 +161,21 @@ const RequestAnAsset = () => {
                         <div className="card-body flex flex-col">
                             {/* Title */}
                             <h2 className="card-title text-lg font-semibold">
-                                {asset.productName}
+                                {asset?.productName}
                             </h2>
 
                             {/* Short Description */}
                             <p className="text-sm text-gray-600 line-clamp-2">
-                                {asset.shortDescription}
+                                {asset?.shortDescription}
                             </p>
 
                             {/* Meta Info */}
                             <div className="text-sm text-gray-500 mt-2 space-y-1">
-                                <p><span className="font-bold">Type:</span> {asset.productType}</p>
-                                <p><span className="font-bold">Available:</span> {asset.availableQuantity}</p>
+                                <p><span className="font-bold">Type:</span> {asset?.productType}</p>
+                                <p><span className="font-bold">Available:</span> {asset?.availableQuantity}</p>
                                 <p>
                                     <span className="font-bold">Date:{" "}</span>
-                                    {new Date(asset.createdAt || Date.now()).toLocaleDateString()}
+                                    {new Date(asset?.createdAt || Date.now()).toLocaleDateString()}
                                 </p>
                             </div>
 
@@ -166,7 +229,39 @@ const RequestAnAsset = () => {
                     </div>
                 </dialog>
             )}
+
+            <div className="flex justify-center items-center gap-2 mt-8">
+
+                <button
+                    className="btn btn-sm"
+                    disabled={page === 1}
+                    onClick={() => setPage(page - 1)}
+                >
+                    Prev
+                </button>
+
+                {[...Array(totalPages).keys()].map(num => (
+                    <button
+                        key={num}
+                        className={`btn btn-sm ${page === num + 1 ? "btn-error" : ""}`}
+                        onClick={() => setPage(num + 1)}
+                    >
+                        {num + 1}
+                    </button>
+                ))}
+
+                <button
+                    className="btn btn-sm"
+                    disabled={page === totalPages}
+                    onClick={() => setPage(page + 1)}
+                >
+                    Next
+                </button>
+            </div>
+
         </div>
+
+
     );
 };
 

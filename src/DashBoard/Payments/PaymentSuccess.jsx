@@ -45,7 +45,7 @@ const PaymentSuccess = () => {
                     Your transaction has been completed successfully.
                 </p>
                 <p className="bg-gray-100 px-4 py-2 rounded text-gray-800">
-                    Transaction ID: <span className="font-bold">{paymentInfo.transactionId}</span>
+                    Transaction ID: <span className="font-bold">{paymentInfo?.transactionId}</span>
                 </p>
             </div>
         </div>

@@ -34,7 +34,7 @@ const MyAssets = () => {
 
   return (
     <div className="p-6 bg-[#cae1f1] min-h-screen">
-      <h2 className="text-2xl font-bold mb-2">My Assets: {assets.length}</h2>
+      <h2 className="text-2xl font-bold mb-2">My Assets: {assets?.length}</h2>
 
       {/* Search & Filter */}
       <div className="flex gap-4 mb-4">

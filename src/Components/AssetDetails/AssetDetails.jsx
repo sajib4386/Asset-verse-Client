@@ -3,13 +3,11 @@ import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 import Loading from "../Loading/Loading";
-import useAuth from "../../Hooks/useAuth";
 import useAxios from "../../Hooks/useAxios";
 
 const AssetDetails = () => {
     const { id } = useParams();
     const axiosInstance = useAxios()
-    const { user } = useAuth()
 
     const { data: asset, isLoading } = useQuery({
         queryKey: ["asset", id],

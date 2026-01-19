@@ -101,7 +101,7 @@ const AllRequests = () => {
 
     return (
         <div className="p-6 bg-[#cae1f1] min-h-screen">
-            <h2 className="text-2xl font-bold mb-4 text-center">All Asset Requests: {requests.length}</h2>
+            <h2 className="text-2xl font-bold mb-4 text-center">All Asset Requests: {requests?.length}</h2>
 
             <div className="bg-white overflow-x-auto shadow-lg shadow-gray-500 rounded-xl">
                 <table className="table table-zebra">
