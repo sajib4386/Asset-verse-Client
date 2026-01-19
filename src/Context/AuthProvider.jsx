@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { AuthContext } from './AuthContext';
 import { auth } from '../firebase.config';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile, } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile, } from 'firebase/auth';
 import useAxios from '../Hooks/useAxios';
 
 
@@ -11,6 +11,7 @@ const AuthProvider = ({ children }) => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
     const axiosInstance = useAxios()
+    const googleProvider = new GoogleAuthProvider();
 
 
     const createUser = (email, password) => {
@@ -21,6 +22,11 @@ const AuthProvider = ({ children }) => {
     const signIn = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
+    }
+
+    const signInWithGoogle = () => {
+        setLoading(true);
+        return signInWithPopup(auth, googleProvider);
     }
 
     const updateUser = (updateData) => {
@@ -58,6 +64,7 @@ const AuthProvider = ({ children }) => {
         user,
         setUser,
         signIn,
+        signInWithGoogle,
         error,
         setError,
         createUser,

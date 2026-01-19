@@ -5,13 +5,16 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import Loading from "../Components/Loading/Loading";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import useAxios from "../Hooks/useAxios";
 
 const Login = () => {
-    const { signIn, loading, setLoading, setError } = useAuth();
+    const { signIn, loading, setLoading, setError, signInWithGoogle } = useAuth();
     const navigate = useNavigate();
+    const axiosInstance = useAxios()
     const [showPassword, setShowPassword] = useState(false)
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
     const handleLoginSubmit = (data) => {
         setLoading(true);
@@ -37,6 +40,55 @@ const Login = () => {
                 });
             });
     };
+
+    const handleGoogleLogin = async () => {
+        setLoading(true);
+        setError("");
+
+        try {
+            const result = await signInWithGoogle();
+
+            const socialUser = {
+                name: result.user.displayName,
+                email: result.user.email,
+                photoURL: result.user.photoURL,
+                role: "employee"
+            };
+
+            const res = await axiosInstance.post("/register/social-user", socialUser);
+
+            Swal.fire({
+                icon: "success",
+                title: `Login Successful as ${res.data.role}`,
+                timer: 1500,
+            });
+
+            navigate("/");
+        } catch (err) {
+            setError(err.message);
+            Swal.fire({
+                icon: "error",
+                title: "Google Login Failed",
+                text: err.message,
+            });
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
+
+    const handleDemoLogin = (roleType) => {
+        if (roleType === "employee") {
+            setValue("email", "demoemployee@gmail.com");
+            setValue("password", "DemoEmp123@");
+        } else if (roleType === "hr") {
+            setValue("email", "demohr@gmail.com");
+            setValue("password", "DemoHR123@");
+        }
+    };
+
+
 
     const handlePassword = (e) => {
         e.preventDefault()
@@ -108,6 +160,34 @@ const Login = () => {
                     <button className="btn bg-secondary text-white w-full mt-4 rounded-xl">
                         Login
                     </button>
+
+                    {/* Demo Login Buttons */}
+                    <div className="flex gap-2 mt-3">
+                        <button
+                            type="button"
+                            onClick={() => handleDemoLogin("employee")}
+                            className="btn flex-1 bg-indigo-500 hover:bg-indigo-600 text-white text-sm"
+                        >
+                            Login as Demo Employee
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => handleDemoLogin("hr")}
+                            className="btn flex-1 bg-green-500 hover:bg-green-600 text-white text-sm"
+                        >
+                            Login as Demo HR
+                        </button>
+                    </div>
+
+                    {/* Google */}
+                    <button
+                        type="button"
+                        onClick={handleGoogleLogin}
+                        className="btn w-full bg-white border border-gray-300 text-gray-700 mb-2">
+                        <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="m0 0H512V512H0" fill="#fff"></path><path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path><path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path><path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path><path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path></g></svg>
+                        Login with Google
+                    </button>
+
                 </form>
 
                 {/* NEW USER LINK */}
