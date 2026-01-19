@@ -24,6 +24,8 @@ import PaymentCancelled from "../DashBoard/Payments/PaymentCancelled";
 import Analytics from "../DashBoard/HR/Analytics";
 import AllAsset from "../Components/AllAsset/AllAsset";
 import AssetDetails from "../Components/AssetDetails/AssetDetails";
+import Contact from "../Components/Contact/Contact";
+import Blogs from "../Components/Blogs/Blogs";
 
 export const router = createBrowserRouter([
     {
@@ -54,6 +56,14 @@ export const router = createBrowserRouter([
             {
                 path: "/assets/:id",
                 Component: AssetDetails
+            },
+            {
+                path: "/contact",
+                Component: Contact
+            },
+            {
+                path: "/blogs",
+                Component: Blogs
             }
         ]
     },

@@ -54,21 +54,21 @@ const Analytics = () => {
                 <div className="bg-white rounded-2xl shadow-md p-6 text-center hover:shadow-xl transition">
                     <h4 className="text-gray-500 text-sm">Total Employees</h4>
                     <p className="text-3xl font-bold text-indigo-600 mt-2">
-                        {overview.totalEmployees}
+                        {overview?.totalEmployees}
                     </p>
                 </div>
 
                 <div className="bg-white rounded-2xl shadow-md p-6 text-center hover:shadow-xl transition">
                     <h4 className="text-gray-500 text-sm">Total Assets</h4>
                     <p className="text-3xl font-bold text-green-600 mt-2">
-                        {overview.totalAssets}
+                        {overview?.totalAssets}
                     </p>
                 </div>
 
                 <div className="bg-white rounded-2xl shadow-md p-6 text-center hover:shadow-xl transition">
                     <h4 className="text-gray-500 text-sm">Total Requests</h4>
                     <p className="text-3xl font-bold text-rose-600 mt-2">
-                        {overview.totalRequests}
+                        {overview?.totalRequests}
                     </p>
                 </div>
             </div>

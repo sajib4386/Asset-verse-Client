@@ -35,6 +35,8 @@ const NavBar = () => {
         <>
             <li className='m-1'><NavLink to="/" className="nav-item">Home</NavLink></li>
             <li className='m-1'><NavLink to="/all-assets" className="nav-item">Assets</NavLink></li>
+            <li className='m-1'><NavLink to="/contact" className="nav-item">Contact</NavLink></li>
+            <li className='m-1'><NavLink to="/blogs" className="nav-item">Blogs</NavLink></li>
             <li className='m-1'><NavLink to="/employee-register" className="nav-item">Join as Employee</NavLink></li>
             <li className='m-1'><NavLink to="/hr-register" className="nav-item">Join as HR Manager</NavLink></li>
         </>
@@ -87,6 +89,8 @@ const NavBar = () => {
 
                             <li className='m-1'><NavLink to="/" className="nav-item">Home</NavLink></li>
                             <li className='m-1'><NavLink to="/all-assets" className="nav-item">Assets</NavLink></li>
+                            <li className='m-1'><NavLink to="/contact" className="nav-item">Contact</NavLink></li>
+                             <li className='m-1'><NavLink to="/blogs" className="nav-item">Blogs</NavLink></li>
 
                             {!user &&
                                 <>
@@ -118,6 +122,8 @@ const NavBar = () => {
                             <>
                                 <li className='m-1'><NavLink to="/" className="nav-item">Home</NavLink></li>
                                 <li className='m-1'><NavLink to="/all-assets" className="nav-item">Assets</NavLink></li>
+                                <li className='m-1'><NavLink to="/contact" className="nav-item">Contact</NavLink></li>
+                                 <li className='m-1'><NavLink to="/blogs" className="nav-item">Blogs</NavLink></li>
                             </> : publicLinks}
 
                     </ul>
